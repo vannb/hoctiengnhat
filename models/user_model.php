@@ -32,6 +32,7 @@ class User_Model extends Model {
             'C_NAME' => $name,
             'C_EMAIL' => $email
         );
+        $result = DB::insert('t_user', $arr_data);
         return 1;
     }
 
