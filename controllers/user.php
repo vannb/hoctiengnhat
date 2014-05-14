@@ -39,42 +39,43 @@ class User extends Controller {
     function Register() {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $username = trim(get_post_var('username', null));
-            if (strlen($username) > 32 or strlen($username) < 5) {
-                $this->view->render('user/login', 'Tên đăng nhập phải từ 5 đến 32 ký tự');
-                exit;
-            }
-
-            $password = get_post_var('password', null);
-            if (strlen($username) > 32 or strlen($username) < 5) {
-                $this->view->render('user/login', 'Mật khẩu phải từ 5 đến 32 ký tự');
-                exit;
-            }
-
             $confirm_password = get_post_var('confirm_password', null);
-            if ($confirm_password != $password) {
-                $this->view->render('user/login', 'Nhập lại mật khẩu không khớp');
-                exit;
-            }
-
             $name = trim(get_post_var('name', null));
-            if ($name == '') {
-                $this->view->render('user/login', 'Tên không được trống');
+            $password = get_post_var('password', null);
+            $email = get_post_var('email', null);
+            $policy = get_post_var('policy', null);
+            
+            $confirm_email = get_post_var('confirm_email', null);
+            if (strlen($username) > 32 or strlen($username) < 5) {
+                $this->view->render('user/register', 'Tên đăng nhập phải từ 5 đến 32 ký tự');
                 exit;
             }
 
-            $email = get_post_var('email', null);
+            if (strlen($username) > 32 or strlen($username) < 5) {
+                $this->view->render('user/register', 'Mật khẩu phải từ 5 đến 32 ký tự');
+                exit;
+            }
+
+            if ($confirm_password != $password) {
+                $this->view->render('user/register', 'Nhập lại mật khẩu không khớp');
+                exit;
+            }
+
+            if ($name == '') {
+                $this->view->render('user/register', 'Tên không được trống');
+                exit;
+            }
+
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $this->view->render('user/login', 'Email không hợp lệ');
+                $this->view->render('user/register', 'Email không hợp lệ');
                 exit;
             }
-            $confirm_email = get_post_var('confirm_email', null);
-            if ($confirm_email != $confirm_password) {
-                $this->view->render('user/login', 'Nhập lại Email không khớp');
+            if ($confirm_email != $email) {
+                $this->view->render('user/register', 'Nhập lại Email không khớp');
                 exit;
             }
-            $policy = get_post_var('policy', null);
             if ($policy != 'agree') {
-                $this->view->render('user/login', 'Bạn phải đồng ý với các điều khoản');
+                $this->view->render('user/register', 'Bạn phải đồng ý với các điều khoản');
                 exit;
             }
             $this->model->register();
