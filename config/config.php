@@ -3,7 +3,6 @@ define('DEBUG_MODE', 1);
 define('URL',"http://localhost/hoctiengnhat/index.php?url=");
 define('PATH',"http://localhost/hoctiengnhat/");
 define('DEFAULT_BRAND', '2200');
-define('HASH_KEY','ntmc');
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'sell');
