@@ -20,7 +20,9 @@ else
 require_once (SERVER_ROOT . 'libs/Bootstrap.php');
 require_once (SERVER_ROOT . 'libs/Controller.php');
 require_once (SERVER_ROOT . 'libs/Model.php');
+require_once (SERVER_ROOT . 'libs/MultiLang.php');
 require_once (SERVER_ROOT . 'libs/Session.php');
+require_once (SERVER_ROOT . 'libs/about_user.php');
 require_once (SERVER_ROOT . 'libs/SharedFunctions.php');
 require_once (SERVER_ROOT . 'libs/PasswordHash.php');
 require_once (SERVER_ROOT . 'libs/Session.php');

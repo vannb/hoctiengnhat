@@ -32,7 +32,7 @@
         <link rel="shortcut icon" href="<?php echo PATH ?>img/favicon.ico" />
         <link rel="apple-touch-icon-precomposed" href="<?php echo PATH ?>img/apple-touch-icon-precomposed.png" />
     </head>
-    <body  data-layout-sidebar="fixed" data-layout-topbar="fixed">       
+    <body  data-layout-sidebar="fixed" data-layout-topbar="fixed"> 
         <div id="navigation">
             <div class="container-fluid">
                 <a href="#" id="brand">
@@ -290,28 +290,6 @@
                 <?php endforeach;
                 ?>
             </div>
-            <?php if (isset($this->popup_msg) && $this->popup_msg != ''): ?>
-                <script>
-                    var unique_id = $.gritter.add({
-                        // (string | mandatory) the heading of the notification
-                        title: 'Thông báo',
-                        // (string | mandatory) the text inside the notification
-                        text: '<?php echo $this->popup_msg ?>',
-                        // (string | optional) the image to display on the left
-                        // (bool | optional) if you want it to fade out on its own or just sit there
-                        sticky: true
-                    });
-
-                    // You can have it return a unique id, this can be used to manually remove it later using
-                    setTimeout(function() {
-                        $.gritter.remove(unique_id, {
-                            fade: true,
-                            speed: 'slow'
-                        });
-
-                    }, 6000)
-                </script>
-            <?php endif; ?>
             <div id="main">
                 <div class="container-fluid">
                     <div class="page-header">

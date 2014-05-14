@@ -21,11 +21,11 @@ class User_Model extends Model {
         if ($result == 'email') {
             return 'Địa chỉ email đã tồn tại';
         }
-        
+
         if ($result == 'username') {
             return 'Tên đăng nhập đã tồn tại';
         }
-        
+
         $arr_data = array(
             'C_USERNAME' => $username,
             'C_PASSWORD' => $password,
@@ -33,27 +33,27 @@ class User_Model extends Model {
             'C_EMAIL' => $email
         );
         $result = DB::insert('t_user', $arr_data);
-        if(!$result){
+        if (!$result) {
             return 'Lỗi không xác định, xin vui lòng thử lại';
         }
         return 1;
     }
 
-//    function check_availability($username = null, $email = null) {
-//        if ($username) {
-//            $result = DB::count('t_user', array(), array('C_USERNAME' => $username));
-//            if ($result) {
-//                return 'username';
-//            }
-//        }
-//        if ($email) {
-//            $result = DB::count('t_user', array(), array('C_EMAIL' => $email));
-//            if ($result) {
-//                return 'email';
-//            }
-//        }
-//        return 'available';
-//    }
+    function check_availability($username = null, $email = null) {
+        if ($username) {
+            $result = DB::count('t_user', array(), array('C_USERNAME' => $username));
+            if ($result) {
+                return 'username';
+            }
+        }
+        if ($email) {
+            $result = DB::count('t_user', array(), array('C_EMAIL' => $email));
+            if ($result) {
+                return 'email';
+            }
+        }
+        return 'available';
+    }
 
 }
 

@@ -44,7 +44,7 @@ class User extends Controller {
             $password = get_post_var('password', null);
             $email = get_post_var('email', null);
             $policy = get_post_var('policy', null);
-            
+
             $confirm_email = get_post_var('confirm_email', null);
             if (strlen($username) > 32 or strlen($username) < 5) {
                 $this->view->render('user/register', 'Tên đăng nhập phải từ 5 đến 32 ký tự');
@@ -78,7 +78,14 @@ class User extends Controller {
                 $this->view->render('user/register', 'Bạn phải đồng ý với các điều khoản');
                 exit;
             }
-            $this->model->register();
+            $result = $this->model->register();
+            if ($result === 1) {
+                about_user::require_login('Đăng ký thành công, xin vui lòng đăng nhập');
+                $this->view->render('user/login', 'Đăng ký thành công, xin vui lòng đăng nhập'); 
+               exit;
+            } else {
+                $this->view->render('user/register', $result);
+            }
         }
         $this->view->render('user/register');
         exit;

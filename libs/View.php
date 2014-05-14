@@ -9,7 +9,7 @@ class View {
     function __construct($name) {
         $this->name = $name;
         $this->template->default_navbar = array(
-            "Trang chủ" => URL.'home',
+            "Trang chủ" => URL . 'home',
             "Bài giảng" => array('Phồn thể' => 'bloh'),
             "Chữ Hán" => array('')
         );
@@ -23,11 +23,11 @@ class View {
         return URL . $name . '/';
     }
 
-    public function render_error($msg = ''){
+    public function render_error($msg = '') {
         require 'views/error.php';
         die();
     }
-    
+
     public function render($file, $popup_msg = null, $render_header = 1) {
         if (!file_exists('views/' . $file . '.php')) {
             if (DEBUG_MODE == false) {
@@ -37,7 +37,7 @@ class View {
             }
             die();
         }
-        $this->popup_msg = $popup_msg;
+        
         if ($render_header) {
             require 'views/header' . $render_header . '.php';
             require 'views/' . $file . '.php';
@@ -45,6 +45,24 @@ class View {
         } else {
             require 'views/' . $file . '.php';
         }
+        
+        $this->popup_msg = (isset($popup_msg) && $popup_msg) ? $popup_msg : get_post_var('popup_msg', '');
+        if ($this->popup_msg):
+            echo
+            '<script>'
+            . 'var unique_id = $.gritter.add({'
+            . "title: 'Thông báo',"
+            . "text: '" . $this->popup_msg . "',"
+            . 'sticky: true'
+            . '});'
+            . 'setTimeout(function() {'
+            . '$.gritter.remove(unique_id, {'
+            . 'fade: true,'
+            . "speed: 'slow'"
+            . '});'
+            . '}, 6000)'
+            . '</script>';
+        endif;
     }
 
     public static function hidden($name, $value = '') {
@@ -109,9 +127,9 @@ class View {
     public static function paging2($arr_all_record) {
         $html = '';
 
-        $rows_per_page = isset($_POST['sel_rows_per_page']) ? replace_bad_char($_POST['sel_rows_per_page']) : _CONST_DEFAULT_ROWS_PER_PAGE;
+        $rows_per_page = isset($_POST['sel_rows_per_page']) ? htmlspecialchars($_POST['sel_rows_per_page']) : _CONST_DEFAULT_ROWS_PER_PAGE;
         if (isset($arr_all_record[0]['TOTAL_RECORD'])) {
-            $page = isset($_POST['sel_goto_page']) ? replace_bad_char($_POST['sel_goto_page']) : 1;
+            $page = isset($_POST['sel_goto_page']) ? htmlspecialchars($_POST['sel_goto_page']) : 1;
             $total_record = $arr_all_record[0]['TOTAL_RECORD'];
         } else {
             $page = 1;

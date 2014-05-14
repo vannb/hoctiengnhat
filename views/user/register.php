@@ -17,7 +17,7 @@
                                 <input class="input-block-level" type="text" id="username" name="username"
                                        maxlength="32" placeholder="Tên đăng nhập"
                                        data-rule-required="true" data-rule-minlength="5"
-                                       required="true">
+                                       required="true" value="<?php echo get_post_var('username', '') ?>">
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -64,7 +64,7 @@
                                 <input class="input-block-level" type="text" id="name" name="name"
                                        maxlength="100" placeholder="Họ và tên"
                                        data-rule-required="true"
-                                       required="true">
+                                       required="true" value="<?php echo get_post_var('name', '') ?>">
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -77,7 +77,7 @@
                                        id="email" name="email"
                                        maxlength="100" placeholder="Email"
                                        data-rule-required="true"
-                                       data-rule-email ="true" required="true">
+                                       data-rule-email ="true" required="true" value="<?php echo get_post_var('email'); ?>">
                             </div>
                             <div class="clearfix"></div>
                         </div>

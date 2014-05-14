@@ -1,7 +1,6 @@
 <?php
 
-class user
-{
+class about_user {
 
     public $username;
     public $password;
@@ -22,92 +21,76 @@ class user
      * Trả về thông tin người dùng đang đăng nhập
      * @return \ehr_user
      */
-    public function import_array($arr_data)
-    {
-        if (empty($arr_data) || is_array($arr_data) == false)
-        {
+    public function import_array($arr_data) {
+        if (empty($arr_data) || is_array($arr_data) == false) {
             return;
         }
-        
+
         $mapping = static::$_mapping;
-        foreach ($mapping as $prop => $col)
-        {
+        foreach ($mapping as $prop => $col) {
             $this->{$prop} = isset($arr_data[$col]) ? $arr_data[$col] : null;
         }
-        
-        foreach ($mapping as $prop => $col)
-        {
+
+        foreach ($mapping as $prop => $col) {
             $this->{$prop} = isset($arr_data[$col]) ? $arr_data[$col] : null;
         }
     }
-    public static function current_user()
-    {
+
+    public static function current_user() {
         Session::init();
         return Session::get('user');
     }
 
-    public static function is_login()
-    {
+    public static function is_login() {
         return ((bool) self::current_user());
     }
 
-    public static function require_login()
-    {
-        if (!self::is_login())
-        {
-            header('Location: ' . PATH . 'user/login');
+    public static function require_login($message = '') {
+        if (!self::is_login()) {
+            if ($message) {
+                redirect_popup_msg(URL . 'user/login', $message);
+            }
+            header('Location: ' . URL . 'user/login');
             exit;
         }
     }
 
-    public function __construct($user_id = null, $username = null)
-    {
-        if ($user_id)
-        {
+    public function __construct($user_id = null, $username = null) {
+        if ($user_id) {
             $this->import_array(
                     self::qry_single_user_by_id($user_id)
             );
-        }
-        elseif ($username)
-        {
+        } elseif ($username) {
             $this->import_array(
                     self::qry_single_user_by_login($username)
             );
         }
     }
 
-    static function qry_user_by_id($id, $fields = '*')
-    {
+    static function qry_user_by_id($id, $fields = '*') {
         $sql = "Select $fields From t_cores_user Where PK_USER = ?";
         $params = array($id);
         return DB::get_instance()->GetRow($sql, $params);
     }
 
-    static function qry_user_by_username($username, $fields = '*')
-    {
+    static function qry_user_by_username($username, $fields = '*') {
         $sql = "Select $fields From t_cores_user Where C_USERNAME = ?";
         $params = array($username);
         return DB::get_instance()->GetRow($sql, $params);
     }
 
-    static function qry_all_user($fields = '*', $assoc = false)
-    {
+    static function qry_all_user($fields = '*', $assoc = false) {
         $sql = "Select $fields From t_user";
-        if ($assoc)
-        {
+        if ($assoc) {
             return DB::get_instance()->GetAssoc($sql);
-        }
-        else
-        {
+        } else {
             return DB::get_instance()->GetAll($sql);
         }
     }
-    
-    public function is_admin()
-    {
+
+    public function is_admin() {
         return ((bool) $this->is_admin);
     }
-
 
     /**
      * Kiểm tra quyền thao thác

@@ -1,5 +1,5 @@
 <?php
-define('DEBUG_MODE', 0);
+define('DEBUG_MODE', 1);
 define('URL',"http://localhost/hoctiengnhat/index.php?url=");
 define('PATH',"http://localhost/hoctiengnhat/");
 define('DEFAULT_BRAND', '2200');
