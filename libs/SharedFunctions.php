@@ -1,3 +1,4 @@
+<?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
 
 function hidden($name, $value = '') {
@@ -43,7 +44,8 @@ function get_post_var($html_object_name, $default_value = null, $is_replace_bad_
     return $var;
 }
 
-function translate($text,$force_language = false){
+function translate($text, $force_language = false) {
     return MultiLang::translate($text);
 }
+
 ?>

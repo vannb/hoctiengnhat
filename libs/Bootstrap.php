@@ -1,6 +1,8 @@
+<?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
 
 class Bootstrap {
+
     function __construct() {
         Session::init();
         if (isset($_GET['url']) && !empty($_GET['url'])) {
@@ -19,7 +21,7 @@ class Bootstrap {
         $controller->loadModel($url[0]);
         if (!isset($url[1])) {
             if (isset($_GET['method'])) {
-                if(isset($_GET['param'])) {
+                if (isset($_GET['param'])) {
                     $controller->$_GET['method']($_GET['param']);
                 }
                 $controller->$_GET['method']();
@@ -38,4 +40,5 @@ class Bootstrap {
             $controller->$url[1]($url[2]);
         //$controller->Index();
     }
+
 }

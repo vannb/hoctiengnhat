@@ -1,5 +1,5 @@
+<?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
-
 class about_user {
 
     public $username;
@@ -68,13 +68,13 @@ class about_user {
     }
 
     static function qry_user_by_id($id, $fields = '*') {
-        $sql = "Select $fields From t_cores_user Where PK_USER = ?";
+        $sql = "Select $fields From t_user Where PK_USER = ?";
         $params = array($id);
         return DB::get_instance()->GetRow($sql, $params);
     }
 
     static function qry_user_by_username($username, $fields = '*') {
-        $sql = "Select $fields From t_cores_user Where C_USERNAME = ?";
+        $sql = "Select $fields From t_user Where C_USERNAME = ?";
         $params = array($username);
         return DB::get_instance()->GetRow($sql, $params);
     }
@@ -91,11 +91,4 @@ class about_user {
     public function is_admin() {
         return ((bool) $this->is_admin);
     }
-
-    /**
-     * Kiểm tra quyền thao thác
-     * @param string $permission Tên quyền
-     * @param string $app[optional] Tên ứng dụng
-     * @return boolean
-     */
 }

@@ -1,3 +1,4 @@
+<?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
 
 class Product {
@@ -115,27 +116,27 @@ class Product {
                 <table class='table'>
                     <tr>
                         <th>Product name</th>
-                        <td><?php echo $product['ProductName']?></td>
+                        <td><?php echo $product['ProductName'] ?></td>
                     </tr>
                     <tr>
                         <th>Manufacturer</th>
-                        <td><?php echo $product['ManufacturerName']?></td>
+                        <td><?php echo $product['ManufacturerName'] ?></td>
                     </tr>
                     <tr>
                         <th>Category</th>
-                        <td><?php echo $product['CategoryName']?></td>
+                        <td><?php echo $product['CategoryName'] ?></td>
                     </tr>
                     <tr>
                         <th>Origin</th>
-                        <td><?php echo $product['Origin']?></td>
+                        <td><?php echo $product['Origin'] ?></td>
                     </tr>
                     <tr>
                         <th>Warranty</th>
-                        <td><?php echo $product['Warranty']?></td>
+                        <td><?php echo $product['Warranty'] ?></td>
                     </tr>
                     <tr>
                         <th>Price</th>
-                        <td><?php echo $product['Price']?></td>
+                        <td><?php echo $product['Price'] ?></td>
                     </tr>
                 </table>
             </div>

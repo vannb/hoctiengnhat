@@ -1,3 +1,4 @@
+<?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
 
 require 'libs/Controller.php';

@@ -1,11 +1,12 @@
+<?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
-
 class Controller {
 
     protected $name = '';
     protected $view;
     protected $model;
-            function __construct($name) {
+
+    function __construct($name) {
         @session_start();
         $this->name = $name;
         $this->view = new View($name);
@@ -23,8 +24,8 @@ class Controller {
         }
     }
 
-    public function error($error_code) {
-        die('Xuất hiện lỗi: ' . $error_code);
+    public function error($message) {
+        $this->view->render_error($message);
     }
 
 }

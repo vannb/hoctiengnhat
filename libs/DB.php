@@ -1,3 +1,4 @@
+<?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
 
 require 'libs/adodb5/adodb.inc.php';
@@ -168,9 +169,9 @@ class DB {
                 $sql.= ' LIMIT ' . $limit;
             }
         }
-        
-        if($orderby){
-            $sql .= ' ORDER BY '.$orderby;
+
+        if ($orderby) {
+            $sql .= ' ORDER BY ' . $orderby;
         }
         $sql.=';';
         if (!empty($executearr)) {
@@ -226,4 +227,5 @@ class DB {
         }
         return $result;
     }
+
 }

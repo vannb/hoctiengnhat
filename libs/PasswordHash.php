@@ -1,3 +1,4 @@
+<?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
 
 //create hash:
@@ -59,12 +60,11 @@ class PasswordHash {
             return false;
         return $hash;
     }
-    
+
     public static function Check($password, $stored_hash) {
         $hasher = static::get_instance();
         return $hasher->CheckPassword($password, $stored_hash);
     }
-    
 
     function PasswordHash($iteration_count_log2 = 8, $portable_hashes = FALSE) {
         $this->itoa64 = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -270,5 +270,7 @@ class PasswordHash {
 
         return $hash == $stored_hash;
     }
+
 }
+
 ?>

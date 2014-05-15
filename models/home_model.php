@@ -1,5 +1,5 @@
+<?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
-
 class Home_Model extends Model {
 
     function __construct() {
@@ -77,7 +77,7 @@ class Home_Model extends Model {
                 );
                 $this->db->insert('orders_products', $order_productarr);
             }
-            $orderinfo = $this->db->search('orders',array(),array('orderID' => $orderid));
+            $orderinfo = $this->db->search('orders', array(), array('orderID' => $orderid));
             $datetime = new DateTime($orderinfo[0]['OrderDateTime'], new DateTimeZone('Asia/Bangkok'));
             return array($orderid, $datetime);
         }

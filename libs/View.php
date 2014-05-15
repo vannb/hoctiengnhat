@@ -1,5 +1,5 @@
+<?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
-
 class View {
 
     protected $name = '';
@@ -37,7 +37,7 @@ class View {
             }
             die();
         }
-        
+
         if ($render_header) {
             require 'views/header' . $render_header . '.php';
             require 'views/' . $file . '.php';
@@ -45,7 +45,7 @@ class View {
         } else {
             require 'views/' . $file . '.php';
         }
-        
+
         $this->popup_msg = (isset($popup_msg) && $popup_msg) ? $popup_msg : get_post_var('popup_msg', '');
         if ($this->popup_msg):
             echo

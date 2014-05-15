@@ -5,7 +5,6 @@ define('SERVER_ROOT', __DIR__ . '/');
 require_once (SERVER_ROOT . 'libs/session.php');
 
 require 'config/config.php';
-
 if (DEBUG_MODE > 0)
 {
     error_reporting(E_ALL);
