@@ -1,17 +1,6 @@
 <?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
 
-//create hash:
-//$hasher = new PasswordHash();
-//$hash = $hasher->HashPassword('blah');
-//if (strlen($hash) < 20)
-//	fail('Failed to hash new password');
-//unset($hasher);
-//echo $hash;
-//echo '<br/>';
-//check hash:
-//$hasher = new PasswordHash();
-//echo $hasher->CheckPassword('blah',$hash);
 #
 # Portable PHP password hashing framework.
 #

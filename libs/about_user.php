@@ -1,7 +1,7 @@
 <?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
 class about_user {
-
+    
     public $username;
     public $password;
     public $user_id;
@@ -45,8 +45,9 @@ class about_user {
         return ((bool) self::current_user());
     }
 
-    public static function require_login($message = '') {
+    public static function require_login($message = null) {
         if (!self::is_login()) {
+            if(is_null($message)) $message = translate("Bạn phải đăng nhập để có thể thực hiện chức năng này");
             if ($message) {
                 redirect_popup_msg(URL . 'user/login', $message);
             }

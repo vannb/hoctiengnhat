@@ -1,10 +1,15 @@
 <?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
+
 class Controller {
 
     protected $name = '';
-    protected $view;
-    protected $model;
+
+    /** @var \View  */
+    public $view;
+
+    /** @var \Model */
+    public $model;
 
     function __construct($name) {
         @session_start();

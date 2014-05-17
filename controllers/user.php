@@ -25,7 +25,7 @@ class User extends Controller {
     }
 
     function Index() {
-        $this->view->render('user/index');
+        echo 'chưa viết hàm index';
     }
 
     function Login() {
@@ -38,7 +38,7 @@ class User extends Controller {
     }
 
     function Register() {
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {//submit xong
             $username = trim(get_post_var('username', null));
             $confirm_password = get_post_var('confirm_password', null);
             $name = trim(get_post_var('name', null));
@@ -79,13 +79,15 @@ class User extends Controller {
                 $this->view->render('user/register', 'Bạn phải đồng ý với các điều khoản');
                 exit;
             }
+            //sau khi cac thong tin hop le, add user
             $result = $this->model->register();
             if ($result === 1) {
                 about_user::require_login('Đăng ký thành công, xin vui lòng đăng nhập');
-                $this->view->render('user/login', 'Đăng ký thành công, xin vui lòng đăng nhập');
                 exit;
             } else {
+                //render lai register voi thong bao loi $result
                 $this->view->render('user/register', $result);
+                exit;
             }
         }
         $this->view->render('user/register');

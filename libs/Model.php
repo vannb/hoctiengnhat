@@ -31,9 +31,9 @@ class Model {
         return NULL;
     }
 
-    public function get_controller_url($name = NULL) {
+    public function get_controller_url($name) {
         if (empty($name)) {
-            $app = $this->name;
+            $name = $this->name;
         }
 
         return URL . $name . '/';
