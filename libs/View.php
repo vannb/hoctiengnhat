@@ -15,7 +15,7 @@ class View {
             ),
             translate("Chữ Hán") => array('')
         );
-        $this->templage->default_title = DEFAULT_BRAND;
+        $this->template->default_title = DEFAULT_BRAND;
     }
 
     public function get_controller_url($name = null) {

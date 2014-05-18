@@ -22,13 +22,29 @@
         <link rel="shortcut icon" href="<?php echo PATH ?>img/favicon.ico" />
         <link rel="apple-touch-icon-precomposed" href="<?php echo PATH ?>img/apple-touch-icon-precomposed.png" />
     </head>
-    <body  data-layout-sidebar="fixed" data-layout-topbar="fixed"> 
+    <body  data-layout-sidebar="fixed" data-layout-topbar="fixed">
+        <div id="modal-logout" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel"><?php echo translate("Đăng xuất"); ?></h3>
+            </div>
+            <div class="modal-body">
+                <p><?php echo translate("Bạn thực sự muốn đăng xuất?") ?></p>
+            </div>
+            <div class="modal-footer">
+                <a href="<?php echo URL ?>/user/logout" class="btn" aria-hidden="true"><?php echo translate('Xác nhận') ?></a>
+                <a class="btn btn-primary" data-dismiss="modal"><?php echo translate('Hủy') ?></a>
+            </div>
+        </div>
         <div id="navigation">
             <div class="container-fluid">
                 <a href="#" id="brand">
                     <?php echo isset($this->template->brand) ? $this->template->brand : DEFAULT_BRAND ?>
                 </a>
-                <a href="#" style="<?php echo (isset($this->template->show_toggle_sidebar) && !$this->template->show_toggle_sidebar) ? 'display: none' : 'display:block !important' ?>"
+                <a href="#" style="
+                <?php
+                echo (isset($this->template->show_toggle_sidebar) && !$this->template->show_toggle_sidebar) ? 'display: none' : 'display:block !important'
+                ?>"
                    class="toggle-nav" rel="tooltip"  data-container="body"
                    data-placement="bottom" title="Ẩn/hiện thanh bên">
                     <i class="icon-reorder"></i>
@@ -191,7 +207,9 @@
                     </ul>
                     <?php if (about_user::is_login()): ?>
                         <div class="dropdown">
-                            <a href="#" class='dropdown-toggle' data-toggle="dropdown">Văn đẹp zai <img src="img/demo/user-avatar.jpg" alt=""></a>
+                            <a  style="line-height: 27px" href="#" class='dropdown-toggle' data-toggle="dropdown">
+                                <?php echo about_user::current_user()->name; ?>
+                            </a>
                             <ul class="dropdown-menu pull-right">
                                 <li>
                                     <a href="more-userprofile.html">Edit profile</a>
@@ -200,13 +218,16 @@
                                     <a href="#">Account settings</a>
                                 </li>
                                 <li>
-                                    <a href="more-login.html">Sign out</a>
+                                    <a href="#modal-logout" role="button" data-toggle="modal">
+                                        <?php echo translate("Đăng xuất"); ?>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
+
                     <?php else: ?>
                         <div class="dropdown">
-                            <a style="line-height: 27px" href="<?php echo URL?>user/login"><?php echo translate('Đăng nhập')?></a>
+                            <a style="line-height: 27px" href="<?php echo URL ?>user/login"><?php echo translate('Đăng nhập') ?></a>
                         </div>
                     <?php endif; ?>
                 </div>

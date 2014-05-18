@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <title><?php echo $this->template->title ?></title>
+        <title><?php echo isset($this->template->title)?$this->template->title:$this->template->default_title?></title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
         <link rel="stylesheet" href="<?php echo PATH ?>css/plugins/gritter/jquery.gritter.css">
@@ -22,7 +22,6 @@
         <script src="js/eakroko.js"></script>
         <link rel="shortcut icon" href="img/favicon.ico" />
         <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png" />
-
     </head>
     <body class='login'>
         <div class="wrapper">
@@ -59,12 +58,12 @@
                                 <?php echo translate("Ghi nhớ") ?>
                             </label>
                         </div>
-                        <input type="submit" value="Sign me in"
+                        <input type="submit" value="<?php echo translate("Đăng nhập")?>"
                                class='btn btn-primary'>
                     </div>
                 </form>
                 <div class="forget">
-                    <a href="#"><span><?php echo translate('Quên mật khẩu') ?></span></a>
+                    <a href="<?php echo URL?>forgotpassword"><span><?php echo translate('Quên mật khẩu') ?></span></a>
                 </div>
             </div>
         </div>

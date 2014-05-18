@@ -29,31 +29,59 @@ class User extends Controller {
     }
 
     function Login() {
+        $this->view->template->title = translate('Đăng nhập');
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $message = get_post_var('popup_msg');
+            if ($message) {
+                $this->view->render('user/login', $message, 0);
+                exit;
+            }
+            $username = trim(get_post_var('username', ''));
+            $password = trim(get_post_var('password', ''));
+
+            if (strlen($username) > 32 or strlen($username) < 5) {
+                $this->view->render('user/login', translate('Tên đăng nhập phải từ 5 đến 32 ký tự'), 0);
+                exit;
+            }
+
             session::destroy();
             session::init();
+            session_regenerate_id(true);
+            $result = $this->model->login();
+            if ($result === true) {
+                header('location: ' . URL);
+                exit;
+            } else {
+                //dang nhap lai
+                $this->view->render('user/login', $result, 0);
+                exit;
+            }
         }
         $this->view->render('user/login', '', 0);
         exit;
     }
 
+    public function logout() {
+        session::destroy();
+        session::init();
+        session_regenerate_id(true);
+        header('location: '.URL.'user/login');
+    }
+
     function Register() {
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {//submit xong
-            $username = trim(get_post_var('username', null));
-            $confirm_password = get_post_var('confirm_password', null);
-            $name = trim(get_post_var('name', null));
-            $password = get_post_var('password', null);
-            $email = get_post_var('email', null);
-            $policy = get_post_var('policy', null);
+        $this->view->template->title = translate('Đăng ký');
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {//submit xong thi lam gi
+            $username = trim(get_post_var('username', ''));
+            $confirm_password = trim(get_post_var('confirm_password', ''));
+            $name = trim(get_post_var('name', ''));
+            $password = trim(get_post_var('password', ''));
+            $email = trim(get_post_var('email', ''));
+            $policy = get_post_var('policy', '');
 
             $confirm_email = get_post_var('confirm_email', null);
             if (strlen($username) > 32 or strlen($username) < 5) {
                 $this->view->render('user/register', translate('Tên đăng nhập phải từ 5 đến 32 ký tự'));
-                exit;
-            }
-
-            if (strlen($username) > 32 or strlen($username) < 5) {
-                $this->view->render('user/register', translate('Mật khẩu phải từ 5 đến 32 ký tự'));
                 exit;
             }
 
@@ -81,7 +109,7 @@ class User extends Controller {
             }
             //sau khi cac thong tin hop le, add user
             $result = $this->model->register();
-            if ($result === 1) {
+            if ($result === true) {
                 about_user::require_login(translate('Đăng ký thành công, xin vui lòng đăng nhập'));
                 exit;
             } else {
@@ -90,6 +118,7 @@ class User extends Controller {
                 exit;
             }
         }
+        //load trang thi lam gi
         $this->view->render('user/register');
         exit;
     }
@@ -98,6 +127,10 @@ class User extends Controller {
         $result = $this->model->check_availability($_POST['username']);
         $json = json_encode(array('available' => 'true'));
         echo $json;
+    }
+
+    function forgotPassword() {
+        
     }
 
 }

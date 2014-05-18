@@ -8,8 +8,23 @@ class User_Model extends Model {
     }
 
     function login() {
-        $email = get_post_var('email', '');
-        $password = get_post_var('password', '');
+        $username = trim(get_post_var('username'));
+        $password = trim(get_post_var('password', ''));
+
+        $user = new about_user(null, $username);
+        
+        if ($user->user_id == null) {
+            return translate("Tài khoản không tồn tại");
+            exit();
+        }
+        if (PasswordHash::Check($password, $user->password)) {
+            return translate('Mật khẩu không chính xác');
+            exit();
+        }
+        
+        @session::init();
+        Session::set('user', $user);
+        return true;
     }
 
     function register() {
@@ -37,7 +52,7 @@ class User_Model extends Model {
         if (!$result) {
             return translate('Lỗi không xác định, xin vui lòng thử lại');
         }
-        return 1;
+        return true;
     }
 
     function check_availability($username = null, $email = null) {

@@ -1,7 +1,8 @@
 <?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
+
 class about_user {
-    
+
     public $username;
     public $password;
     public $user_id;
@@ -21,6 +22,18 @@ class about_user {
      * Trả về thông tin người dùng đang đăng nhập
      * @return \ehr_user
      */
+    public function __construct($user_id = null, $username = null) {
+        if ($user_id) {
+            $this->import_array(
+                    self::qry_user_by_id($user_id)
+            );
+        } elseif ($username) {
+            $this->import_array(
+                    self::qry_user_by_username($username)
+            );
+        }
+    }
+
     public function import_array($arr_data) {
         if (empty($arr_data) || is_array($arr_data) == false) {
             return;
@@ -47,24 +60,13 @@ class about_user {
 
     public static function require_login($message = null) {
         if (!self::is_login()) {
-            if(is_null($message)) $message = translate("Bạn phải đăng nhập để có thể thực hiện chức năng này");
+            if (is_null($message))
+                $message = translate("Bạn phải đăng nhập để có thể thực hiện chức năng này");
             if ($message) {
                 redirect_popup_msg(URL . 'user/login', $message);
             }
             header('Location: ' . URL . 'user/login');
             exit;
-        }
-    }
-
-    public function __construct($user_id = null, $username = null) {
-        if ($user_id) {
-            $this->import_array(
-                    self::qry_single_user_by_id($user_id)
-            );
-        } elseif ($username) {
-            $this->import_array(
-                    self::qry_single_user_by_login($username)
-            );
         }
     }
 
@@ -92,4 +94,5 @@ class about_user {
     public function is_admin() {
         return ((bool) $this->is_admin);
     }
+
 }

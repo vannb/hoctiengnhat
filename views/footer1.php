@@ -10,6 +10,7 @@
         <script src="<?php echo PATH ?>js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
         <script src="<?php echo PATH ?>js/bootstrap.js"></script>
         <script src="<?php echo PATH ?>js/plugins/form/jquery.form.min.js"></script>
+        <script src="<?php echo PATH ?>js/plugins/bootbox/jquery.bootbox.js"></script>
         <script src="<?php echo PATH ?>js/plugins/gritter/jquery.gritter.min.js"></script>
         <script src="<?php echo PATH ?>js/eakroko.min.js"></script>
         <script src="<?php echo PATH ?>js/application.min.js"></script>
