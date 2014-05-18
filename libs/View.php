@@ -1,7 +1,7 @@
 <?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
-class View {
 
+class View {
     protected $name = '';
     public $template;
     public $popup_msg = '';
@@ -9,10 +9,13 @@ class View {
     function __construct($name) {
         $this->name = $name;
         $this->template->default_navbar = array(
-            "Trang chủ" => URL . 'home',
-            "Bài giảng" => array('Phồn thể' => 'bloh'),
-            "Chữ Hán" => array('')
+            translate("Trang chủ") => URL . 'home',
+            translate("Bài giảng") => array(
+                translate('Phồn thể') => 'bloh'
+            ),
+            translate("Chữ Hán") => array('')
         );
+        $this->templage->default_title = DEFAULT_BRAND;
     }
 
     public function get_controller_url($name = null) {
@@ -31,9 +34,9 @@ class View {
     public function render($file, $popup_msg = null, $render_header = 1) {
         if (!file_exists('views/' . $file . '.php')) {
             if (DEBUG_MODE == false) {
-                $this->render_error('Không tìm thấy file view');
+                $this->render_error(translate('Không tìm thấy file view'));
             } elseif (DEBUG_MODE == true) {
-                echo "Không tìm thấy <b>$file</b>";
+                echo translate("Không tìm thấy") . "<b>$file</b>";
             }
             die();
         }
@@ -105,20 +108,19 @@ class View {
 
         $arr_page = array();
         for ($i = 1; $i <= $v_total_page; $i++) {
-            $arr_page[$i] = __('page') . '&nbsp;' . $i;
+            $arr_page[$i] = translate('trang') . '&nbsp;' . $i;
         }
 
         $html .= '<div class="pager" id="pager">';
-        $html .= __('total') . ' ' . $v_total_page . ' ' . __('page');
+        $html .= translate('total') . ' ' . $v_total_page . ' ' . translate('page');
 
-        $html .= '. ' . __('go to') . '<select name="sel_goto_page" onchange="this.form.submit();">';
+        $html .= '. ' . translate('go to') . '<select name="sel_goto_page" onchange="this.form.submit();">';
         $html .= self::generate_select_option($arr_page, $page);
         $html .= '</select>';
 
-        $html .= __('display') . '<select name="sel_rows_per_page" onchange="this.form.sel_goto_page.value=1;this.form.submit();">';
+        $html .= translate('display') . '<select name="sel_rows_per_page" onchange="this.form.sel_goto_page.value=1;this.form.submit();">';
         $html .= self::generate_select_option(null, $rows_per_page, 'xml_rows_per_page.xml');
-        $html .= '</select> ' . __('record') . '/1 ' . __('page');
-
+        $html .= '</select> ' . translate('record') . '/1 ' . translate('page');
         $html .= '</div>';
 
         return $html;
@@ -144,19 +146,19 @@ class View {
 
         $arr_page = array();
         for ($i = 1; $i <= $v_total_page; $i++) {
-            $arr_page[$i] = __('page') . '&nbsp;' . $i;
+            $arr_page[$i] = translate('page') . '&nbsp;' . $i;
         }
 
         $html .= '<div class="pager" id="pager">';
-        $html .= __('total') . ' ' . $v_total_page . ' ' . __('page');
+        $html .= translate('total') . ' ' . $v_total_page . ' ' . translate('page');
 
-        $html .= '. ' . __('go to') . '<select name="sel_goto_page" onchange="this.form.submit();">';
+        $html .= '. ' . translate('go to') . '<select name="sel_goto_page" onchange="this.form.submit();">';
         $html .= self::generate_select_option($arr_page, $page);
         $html .= '</select>';
 
-        $html .= __('display') . '<select name="sel_rows_per_page" onchange="this.form.sel_goto_page.value=1;this.form.submit();">';
+        $html .= translate('display') . '<select name="sel_rows_per_page" onchange="this.form.sel_goto_page.value=1;this.form.submit();">';
         $html .= self::generate_select_option(null, $rows_per_page, 'xml_rows_per_page.xml');
-        $html .= '</select> ' . __('record') . '/1 ' . __('page');
+        $html .= '</select> ' . translate('record') . '/1 ' . translate('page');
 
         $html .= '</div>';
 
@@ -172,4 +174,5 @@ class View {
 
         return $html;
     }
+
 }

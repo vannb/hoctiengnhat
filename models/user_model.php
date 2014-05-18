@@ -20,11 +20,11 @@ class User_Model extends Model {
 
         $result = $this->check_availability($username, $email);
         if ($result == 'email') {
-            return 'Địa chỉ email đã tồn tại';
+            return translate('Địa chỉ email đã tồn tại');
         }
 
         if ($result == 'username') {
-            return 'Tên đăng nhập đã tồn tại';
+            return translate('Tên đăng nhập đã tồn tại');
         }
 
         $arr_data = array(
@@ -35,7 +35,7 @@ class User_Model extends Model {
         );
         $result = DB::insert('t_user', $arr_data);
         if (!$result) {
-            return 'Lỗi không xác định, xin vui lòng thử lại';
+            return translate('Lỗi không xác định, xin vui lòng thử lại');
         }
         return 1;
     }
@@ -55,6 +55,7 @@ class User_Model extends Model {
         }
         return 'available';
     }
+
 }
 
 ?>

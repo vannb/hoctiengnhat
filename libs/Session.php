@@ -3,8 +3,12 @@
 
 class Session {
 
+    function __construct() {
+        @session_start();
+    }
+
     public static function init() {
-        session_start();
+        @session_start();
     }
 
     public static function get($key) {
@@ -18,7 +22,7 @@ class Session {
     }
 
     public static function destroy() {
-        session_destroy();
+        @session_destroy();
     }
 
 }

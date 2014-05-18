@@ -45,7 +45,7 @@ function get_post_var($html_object_name, $default_value = null, $is_replace_bad_
 }
 
 function translate($text, $force_language = false) {
-    echo MultiLang::translate($text);
+    return MultiLang::translate($text);
 }
 
 ?>

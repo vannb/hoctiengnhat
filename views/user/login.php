@@ -5,10 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <title><?php echo isset($this->template->brand) ? $this->template->brand : DEFAULT_BRAND ?> - Login</title>
+        <title><?php echo $this->template->title ?></title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-
         <link rel="stylesheet" href="<?php echo PATH ?>css/plugins/gritter/jquery.gritter.css">
         <link rel="stylesheet" href="css/plugins/icheck/all.css">
         <link rel="stylesheet" href="css/style.css">
@@ -34,11 +33,11 @@
             </h1>
             <div class="login-body">
                 <h2>SIGN IN</h2>
-                <form action="<?php echo $this->get_controller_url()?>login" method='POST' class='form-validate' id="test">
+                <form action="<?php echo $this->get_controller_url() ?>login" method='POST' class='form-validate' id="test">
                     <div class="control-group">
                         <div class="controls">
                             <input class="input-block-level" type="text" id="username" name="username"
-                                   maxlength="32" placeholder="Tên đăng nhập"
+                                   maxlength="32" placeholder="<?php echo translate("Tên đăng nhập") ?>"
                                    data-rule-required="true" data-rule-minlength="5"
                                    required="true" value="<?php echo get_post_var('username', '') ?>">
                         </div>
@@ -46,7 +45,7 @@
                     <div class="control-group">
                         <div class="pw controls">
                             <input type="password" id="password" name="password"
-                                   placeholder="Mật khẩu" size="60"
+                                   placeholder="<?php echo translate("Mật khẩu") ?>" size="60"
                                    class='complexify-me input-block-level'
                                    data-rule-required="true" data-rule-minlength="5"
                                    required="true">
@@ -54,13 +53,18 @@
                     </div>
                     <div class="submit">
                         <div class="remember">
-                            <input type="checkbox" name="remember" class='icheck-me' data-skin="square" data-color="blue" id="remember"><label for="remember">Remember me</label>
+                            <input type="checkbox" name="remember" class='icheck-me'
+                                   data-skin="square" data-color="blue" id="remember">
+                            <label for="remember">
+                                <?php echo translate("Ghi nhớ") ?>
+                            </label>
                         </div>
-                        <input type="submit" value="Sign me in" class='btn btn-primary'>
+                        <input type="submit" value="Sign me in"
+                               class='btn btn-primary'>
                     </div>
                 </form>
                 <div class="forget">
-                    <a href="#"><span>Quên mật khẩu</span></a>
+                    <a href="#"><span><?php echo translate('Quên mật khẩu') ?></span></a>
                 </div>
             </div>
         </div>

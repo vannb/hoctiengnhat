@@ -25,11 +25,11 @@ class DB {
             case 'ORACLE':
                 //Oracle Setting
                 putenv("NLS_LANG=AMERICAN_AMERICA.AL32UTF8");
-                self::$_instance = NewADOConnection(CONST_ORACLE_DSN) or die('Cannot connect to Oracle Database Server!');
+                self::$_instance = NewADOConnection(CONST_ORACLE_DSN) or die('Không thể kêt nối được với cơ sở dữ liệu');
                 break;
 
             case 'MYSQL':
-                self::$_instance = ADONewConnection('mysqli://' . DB_USER . ':' . DB_PASS . '@' . DB_HOST . '/' . DB_NAME) or die('Cannot connect to MySQL Database Server!');
+                self::$_instance = ADONewConnection('mysqli://' . DB_USER . ':' . DB_PASS . '@' . DB_HOST . '/' . DB_NAME) or die('Không thể kêt nối được với cơ sở dữ liệu');
                 //mysql_set_charset('utf8');
                 self::$_instance->Execute("SET NAMES utf8");
                 break;
@@ -37,7 +37,7 @@ class DB {
             case 'MSSQL':
             default:
                 self::$_instance = ADONewConnection('ado_mssql');
-                self::$_instance->Connect(CONST_MSSQL_DSN) or die('Cannot connect to MSSQL Database Server!');
+                self::$_instance->Connect(CONST_MSSQL_DSN) or die(translate('Không thể kêt nối được với cơ sở dữ liệu'));
                 break;
         }
 

@@ -47,8 +47,8 @@
 
 <body class='error'>
 	<div class="wrapper">
-		<div class="code"><span>Error</span><i class="icon-warning-sign"></i></div>
-		<div class="desc"><?php  echo (msg == '')? $this->msg:"Unknow Error" ?></div>
+            <div class="code"><span>Error</span><i class="icon-warning-sign"></i></div>
+		<div class="desc"><?php  echo (msg == '')? $this->msg:translate("Lỗi không xác định") ?></div>
 		<div class="buttons">
 			<div class="pull-left"><a href="index.html" class="btn"><i class="icon-arrow-left"></i> Back</a></div>
 		</div>

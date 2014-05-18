@@ -12,8 +12,7 @@ class Bootstrap {
         }
         $file = 'controllers/' . $url[0] . '.php';
         if (!file_exists($file)) {
-            require 'controllers/error.php';
-            new Error('This page does not exist');
+            new Error('Trang không tồn tại');
             return;
         }
         require 'controllers/' . $url[0] . '.php';
@@ -30,8 +29,7 @@ class Bootstrap {
             return;
         }
         if (!method_exists($controller, $url[1])) {
-            require 'controllers/error.php';
-            new Error('Method does not exist');
+            new Error(translate('Không tìm thấy hàm'));
             return;
         }
         if (!isset($url[2])) {

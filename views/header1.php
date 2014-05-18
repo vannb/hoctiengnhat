@@ -2,7 +2,9 @@
 <!doctype html>
 <html>
     <head>
-        <title>Test</title>
+        <title>
+            <?php echo isset($this->template->title) ? $this->template->title : $this->template->default_title; ?>
+        </title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -30,7 +32,7 @@
                    class="toggle-nav" rel="tooltip"  data-container="body"
                    data-placement="bottom" title="Ẩn/hiện thanh bên">
                     <i class="icon-reorder"></i>
-                </a>    
+                </a>
                 <ul class='main-nav'>
                     <?php $this->template->navbar = isset($this->template->navbar) ? $this->template->navbar : $this->template->default_navbar ?>
                     <?php foreach ($this->template->navbar as $key => $value) : ?>
@@ -115,7 +117,6 @@
                                 </li>
                             </ul>
                         </li>
-
                         <li class="dropdown sett">
                             <a href="#" class='dropdown-toggle' data-toggle="dropdown">
                                 <i class="icon-cog"></i>
@@ -188,20 +189,26 @@
                             </ul>
                         </li>
                     </ul>
-                    <div class="dropdown">
-                        <a href="#" class='dropdown-toggle' data-toggle="dropdown">Văn đẹp zai <img src="img/demo/user-avatar.jpg" alt=""></a>
-                        <ul class="dropdown-menu pull-right">
-                            <li>
-                                <a href="more-userprofile.html">Edit profile</a>
-                            </li>
-                            <li>
-                                <a href="#">Account settings</a>
-                            </li>
-                            <li>
-                                <a href="more-login.html">Sign out</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <?php if (about_user::is_login()): ?>
+                        <div class="dropdown">
+                            <a href="#" class='dropdown-toggle' data-toggle="dropdown">Văn đẹp zai <img src="img/demo/user-avatar.jpg" alt=""></a>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="more-userprofile.html">Edit profile</a>
+                                </li>
+                                <li>
+                                    <a href="#">Account settings</a>
+                                </li>
+                                <li>
+                                    <a href="more-login.html">Sign out</a>
+                                </li>
+                            </ul>
+                        </div>
+                    <?php else: ?>
+                        <div class="dropdown">
+                            <a style="line-height: 27px" href="<?php echo URL?>user/login"><?php echo translate('Đăng nhập')?></a>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -282,14 +289,14 @@
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="pull-left">
-                            <h1><?php echo isset($this->template->header) ? $this->template->header : 'Trang chủ' ?></h1>
+                            <h1><?php echo isset($this->template->header) ? $this->template->header : translate('Trang chủ') ?></h1>
                         </div>
                     </div>
                     <div class="breadcrumbs">
                         <ul>
 
                             <li>
-                                <a href="index.php">Trang chủ</a>
+                                <a href="index.php"><?php echo translate("Trang chủ"); ?></a>
                             </li>
                             <?php
                             if (isset($this->template->breadcrumbs))

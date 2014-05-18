@@ -1,5 +1,5 @@
 <?php
-ini_set('date.timezone', 'Asia/Ho_Chi_Minh');
+ini_set("date.timezone", 'Asia/Ho_Chi_Minh');
 
 define('SERVER_ROOT', __DIR__ . '/');
 require_once (SERVER_ROOT . 'libs/session.php');
