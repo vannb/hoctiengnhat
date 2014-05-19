@@ -63,7 +63,7 @@
                     </div>
                 </form>
                 <div class="forget">
-                    <a href="<?php echo URL?>forgotpassword"><span><?php echo translate('Quên mật khẩu') ?></span></a>
+                    <a href="<?php echo URL?>user/forgotpassword"><span><?php echo translate('Quên mật khẩu') ?></span></a>
                 </div>
             </div>
         </div>

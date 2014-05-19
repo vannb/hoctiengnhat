@@ -224,7 +224,6 @@
                                 </li>
                             </ul>
                         </div>
-
                     <?php else: ?>
                         <div class="dropdown">
                             <a style="line-height: 27px" href="<?php echo URL ?>user/login"><?php echo translate('Đăng nhập') ?></a>
