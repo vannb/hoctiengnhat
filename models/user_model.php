@@ -17,7 +17,7 @@ class User_Model extends Model {
             return translate("Tài khoản không tồn tại");
             exit();
         }
-        if (PasswordHash::Check($password, $user->password)) {
+        if (!PasswordHash::Check($password, $user->password)) {
             return translate('Mật khẩu không chính xác');
             exit();
         }
