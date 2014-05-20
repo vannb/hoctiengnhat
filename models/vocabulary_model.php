@@ -7,7 +7,7 @@ class vocabulary_Model extends Model {
         parent::__construct();
     }
     
-    function qry_all_lesson_vocabulary($lesson_id){
+    function qry_all_vocabulary_by_lesson($lesson_id){
         
     }
 }

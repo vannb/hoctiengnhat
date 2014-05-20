@@ -18,7 +18,7 @@ class View {
         $this->template->default_title = DEFAULT_BRAND;
     }
 
-    public function get_controller_url($name = null) {
+    public static function get_controller_url($name = null) {
         if (empty($name)) {
             $name = $this->name;
         }
@@ -26,7 +26,7 @@ class View {
         return URL . $name . '/';
     }
 
-    public function render_error($msg = '') {
+    public static function render_error($msg = '') {
         require 'views/error.php';
         die();
     }

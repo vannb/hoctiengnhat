@@ -12,7 +12,7 @@ class Bootstrap {
         }
         $file = 'controllers/' . $url[0] . '.php';
         if (!file_exists($file)) {
-            new Error('Trang không tồn tại');
+            View::render_error('Trang này không tồn tại');
             return;
         }
         require 'controllers/' . $url[0] . '.php';

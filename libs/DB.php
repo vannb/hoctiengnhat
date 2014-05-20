@@ -124,10 +124,10 @@ class DB {
         }
     }
 
-    public static function search($tablename, $keywords = array(), $condition = array(), $offset = 0, $limit = 0, $orderby = 0) {
+    public static function search($tablename, $keywords = array(), $condition = array(), $offset = 0, $limit = 0, $orderby = 0,$row=' * ') {
         $db = self::get_instance();
         $executearr = array();
-        $sql = 'SELECT * FROM ' . $tablename . ' WHERE 1=1 ';
+        $sql = 'SELECT '.$row.' FROM ' . $tablename . ' WHERE 1=1 ';
         if (!empty($keywords)) {
             foreach ($keywords as $key => $value) {
                 $sql.=' AND ' . $key . ' LIKE "%?%"';

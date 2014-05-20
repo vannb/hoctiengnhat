@@ -48,7 +48,7 @@
     <body class='error'>
         <div class="wrapper">
             <div class="code"><span>Error</span><i class="icon-warning-sign"></i></div>
-            <div class="desc"><?php echo ($msg != '') ? $msg : "Unknow Error" ?></div>
+            <div class="desc" style="text-align: center"><?php echo ($msg != '') ? $msg : "Unknow Error" ?></div>
             <div class="buttons">
                 <div class="pull-left"><a href="index.php" class="btn"><i class="icon-arrow-left"></i> Back</a></div>
             </div>

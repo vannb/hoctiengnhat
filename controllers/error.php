@@ -13,9 +13,9 @@ class Error extends Controller {
         $this->index($msg, $mode);
     }
 
-    function index($msg = '', $mode = 0) {
+    function index($msg = '') {
         $this->view->msg = $msg;
-        $this->view->render('error/index', '', $mode);
+        $this->view->render('error', '', 0);
     }
 
 }

@@ -18,9 +18,10 @@ class User extends Controller {
         parent::__construct('user');
         $this->view->template->show_sidebar = 1;
         $this->view->template->show_toggle_sidebar = 1;
+        $this->view->template->title = translate('Đăng ký');
         $this->view->template->header = translate('Đăng ký');
         $this->view->template->breadcrumbs = array(
-            'Đăng ký' => null
+            translate('Đăng ký') => null
         );
     }
 

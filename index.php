@@ -1,4 +1,6 @@
 <?php
+header('Content-type: text/html; charset=UTF-8') ;
+
 ini_set("date.timezone", 'Asia/Ho_Chi_Minh');
 
 define('SERVER_ROOT', __DIR__ . '/');
@@ -16,17 +18,18 @@ else
     ini_set('display_errors', 0);
 }
 
-require_once (SERVER_ROOT . 'libs/Bootstrap.php');
 require_once (SERVER_ROOT . 'libs/Controller.php');
 require_once (SERVER_ROOT . 'libs/Model.php');
 require_once (SERVER_ROOT . 'libs/MultiLang.php');
 require_once (SERVER_ROOT . 'libs/Session.php');
 require_once (SERVER_ROOT . 'libs/about_user.php');
+require_once (SERVER_ROOT . 'libs/about_lesson.php');
 require_once (SERVER_ROOT . 'libs/SharedFunctions.php');
 require_once (SERVER_ROOT . 'libs/PasswordHash.php');
 require_once (SERVER_ROOT . 'libs/Session.php');
 require_once (SERVER_ROOT . 'libs/Cookie.php');
 require_once (SERVER_ROOT . 'libs/View.php');
 require_once (SERVER_ROOT . 'libs/DB.php');
+require_once (SERVER_ROOT . 'libs/Bootstrap.php');
 
 $app = new Bootstrap();
