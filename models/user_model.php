@@ -8,7 +8,7 @@ class User_Model extends Model {
     }
 
     function login() {
-        $username = trim(get_post_var('username'));
+        $username = strtolower(trim(get_post_var('username')));
         $password = trim(get_post_var('password', ''));
 
         $user = new about_user(null, $username);
@@ -28,10 +28,10 @@ class User_Model extends Model {
     }
 
     function register() {
-        $username = trim(get_post_var('username'));
+        $username = strtolower(trim(get_post_var('username')));
         $password = PasswordHash::Hash(get_post_var('password'));
         $name = trim(get_post_var('name'));
-        $email = trim(get_post_var('email'));
+        $email = strtolower(trim(get_post_var('email')));
 
         $result = $this->check_availability($username, $email);
         if ($result == 'email') {
