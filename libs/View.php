@@ -18,7 +18,7 @@ class View {
         $this->template->default_title = DEFAULT_BRAND;
     }
 
-    public static function get_controller_url($name = null) {
+    public function get_controller_url($name = null) {
         if (empty($name)) {
             $name = $this->name;
         }
