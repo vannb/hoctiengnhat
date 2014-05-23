@@ -19,21 +19,36 @@ class vocabulary extends Controller {
     }
 
     public function dsp_lesson_vocabulary($lesson_id) {
-        $v_course = about_lesson::qry_course_by_lesson_id($lesson_id);
-        $v_lesson_name = about_lesson::qry_lesson_name($lesson_id);
+        $this->view->arr_course_info = about_lesson::qry_course_by_lesson_id($lesson_id);
+        $this->view->v_lesson_name = about_lesson::qry_lesson_name($lesson_id);
         $this->view->template->header = translate('Từ vựng');
         $this->view->template->title = translate('Từ vựng');
         $this->view->template->breadcrumbs = array(
-            $v_course['C_NAME'] => $this->view->get_controller_url('lesson').'dsp_course_lesson/'.$v_course['PK_COURSE'],
-            $v_lesson_name => $this->view->get_controller_url('lesson').'dsp_single_lesson/'.$lesson_id,
+            $this->view->arr_course_info['C_NAME'] => $this->view->get_controller_url('lesson') . 'dsp_course_lesson/' . $this->view->arr_course_info['PK_COURSE'],
+            $this->view->v_lesson_name => $this->view->get_controller_url('lesson') . 'dsp_single_lesson/' . $lesson_id,
             translate('Từ vựng') => null
         );
-        
+
         $this->view->arr_vocab = $this->model->qry_all_vocabulary_by_lesson($lesson_id);
-        $this->view->render('vocabulary/dsp_lesson_vocabulary');
+        $this->view->render('vocabulary/dsp_vocabulary');
     }
-    public function xhr_toggle_star(){
+
+    public function dsp_starred_vocabulary() {
+        $this->view->v_lesson_name = 'Được đánh dấu';
+        $this->view->template->header = translate('Từ vựng');
+        $this->view->template->title = translate('Từ vựng');
+        $this->view->template->breadcrumbs = array(
+            translate('Từ vựng') => null,
+            $this->view->v_lesson_name => $this->view->get_controller_url().'dsp_starred_vocabulary',
+        );
+
+        $this->view->arr_vocab = $this->model->qry_all_starred_vocabulary();
+        $this->view->render('vocabulary/dsp_vocabulary');
+    }
+
+    public function xhr_toggle_star() {
         about_user::require_login();
         echo $this->model->toggle_star();
     }
+
 }

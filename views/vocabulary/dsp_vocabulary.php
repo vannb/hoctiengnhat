@@ -23,29 +23,11 @@
     .list .term_wrap{width: 100%;position: relative}
     .list .single_term{border: #e2e2e2 1px solid;margin: -0.5px}
     .popover, .popover img{width: 100%}
-
-
-
-    @-webkit-keyframes spinnerRotate
-    {
-        from{-webkit-transform:rotate(0deg);}
-        to{-webkit-transform:rotate(360deg);}
-    }
-    @-moz-keyframes spinnerRotate
-    {
-        from{-moz-transform:rotate(0deg);}
-        to{-moz-transform:rotate(360deg);}
-    }
-    @-ms-keyframes spinnerRotate
-    {
-        from{-ms-transform:rotate(0deg);}
-        to{-ms-transform:rotate(360deg);}
-    }
 </style>
 <div class="clearfix"></div>
 <div class="box">
     <div class="box-title">
-        <h3><?php echo translate('Tổng cộng: ') . count($this->arr_vocab) . ' từ' ?></h3>
+        <h3><?php echo $this->v_lesson_name . ': ' . count($this->arr_vocab) . ' từ' ?></h3>
         <div class="btn-group pull-right">
             <a href="javascript:;" class="btn btn-large" onclick="grid_view()" rel="tooltip" title="<?php echo translate('Lưới') ?>"><i class="icon-th"></i></a>
             <a href="javascript:;" class="btn btn-large" onclick="list_view()" rel="tooltip" title="<?php echo translate('Danh sách') ?>"><i class="icon-th-list"></i></a>
@@ -54,7 +36,7 @@
     <div id="all_terms" class="row-fluid list">
         <?php foreach ($this->arr_vocab as $key => $value) : ?>
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term_wrap">
-                <div class="single_term" data-html="true" data-delay='{"show":"500"}'
+                <div class="single_term" data-html="true" data-delay='{"show":"250"}'
                      rel="popover" data-trigger="hover click"
                      data-placement="bottom" title="<?php
                      echo $value['C_JAPANESE'];
@@ -70,8 +52,14 @@
                            onclick="toggle_star(<?php echo $value['PK_VOCABULARY'] ?>, this)"
                            class="sel-star spin<?php echo ($value['PK_STARRED']) ? ' active ' : '' ?>"
                            rel="tooltip"  data-container="body"
-                           data-placement="top" title="Đánh dấu">
-                            <i class="icon-star spin"></i>
+                           data-placement="top" title="<?php echo translate("Đánh dấu") ?>">
+                            <i class="icon-star"></i>
+                            <?php if (isset($this->arr_course_info)): ?>
+                                <a href="<?php echo $this->get_controller_url() ?>dsp_starred_vocabulary"
+                                   rel="tooltip"  data-container="body" data-placement="top" 
+                                   title="<?php echo translate("Xem tất cả đánh dấu") ?>"
+                                   >(<?php echo translate("Tất cả"); ?>)</a>
+                               <?php endif; ?>
                         </a>
                     </div>
                     <div></div>
@@ -86,7 +74,7 @@
         $.post('<?php echo $this->get_controller_url('vocabulary') ?>xhr_toggle_star', {'vocabulary_id': vocabulary_id})
                 .done(function(data) {
                     $(that).removeClass('active');
-                    if (data != '0') {
+                    if (data == '1') {
                         $(that).addClass('active');
                         //count_starred++;
                     } else {
