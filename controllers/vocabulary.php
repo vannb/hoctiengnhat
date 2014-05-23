@@ -30,8 +30,10 @@ class vocabulary extends Controller {
         );
         
         $this->view->arr_vocab = $this->model->qry_all_vocabulary_by_lesson($lesson_id);
-        
         $this->view->render('vocabulary/dsp_lesson_vocabulary');
     }
-
+    public function xhr_toggle_star(){
+        about_user::require_login();
+        echo $this->model->toggle_star();
+    }
 }
