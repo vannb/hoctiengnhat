@@ -38,10 +38,10 @@
         </div>
         <div id="navigation">
             <div class="container-fluid">
-                <a href="#" id="brand">
+                <a href="javascript:;" id="brand">
                     <?php echo isset($this->template->brand) ? $this->template->brand : DEFAULT_BRAND ?>
                 </a>
-                <a href="#" style="
+                <a href="javascript:;" style="
                 <?php
                 echo (isset($this->template->show_toggle_sidebar) && !$this->template->show_toggle_sidebar) ? 'display: none' : 'display:block !important'
                 ?>"
@@ -54,7 +54,7 @@
                     <?php foreach ($this->template->navbar as $key => $value) : ?>
                         <li>
                             <?php if (is_array($value)): ?>
-                                <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+                                <a href="javascript:;" data-toggle="dropdown" class='dropdown-toggle'>
                                     <span><?php echo $key ?></span>
                                     <span class="caret"></span>
                                 </a>
@@ -62,13 +62,13 @@
                                     <?php foreach ($value as $child_key => $child_value): ?>
                                         <?php if (is_array($child_value)): ?>
                                             <li class='dropdown-submenu'>
-                                                <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+                                                <a href="javascript:;" data-toggle="dropdown" class='dropdown-toggle'>
                                                     <?php echo $child_key ?>
                                                 </a>
                                                 <ul class="dropdown-menu">
                                                     <?php foreach ($child_value as $grand_child_key => $grand_child_value): ?>
                                                         <li>
-                                                            <a href="<?php echo is_array($grand_child_value) ? '#' : $grand_child_value ?>">
+                                                            <a href="<?php echo is_array($grand_child_value) ? "javascript:;" : $grand_child_value ?>">
                                                                 <?php echo $grand_child_key ?>
                                                             </a>
                                                         </li>
@@ -94,75 +94,8 @@
                 </ul>
                 <div class="user">
                     <ul class="icon-nav">
-                        <li class='dropdown'>
-                            <a href="#" class='dropdown-toggle' data-toggle="dropdown">
-                                <i class="icon-envelope"></i>
-                                <span class="label label-lightred">4</span>
-                            </a>
-                            <ul class="dropdown-menu pull-right message-ul">
-                                <li>
-                                    <a href="#">
-                                        <img src="img/demo/user-2.jpg" alt="">
-                                        <div class="details">
-                                            <div class="name">Đạt khắm lặm</div>
-                                            <div class="message">
-                                                Ut ad laboris est anim ut ...
-                                            </div>
-                                        </div>
-                                        <div class="count">
-                                            <i class="icon-comment"></i>
-                                            <span>3</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="img/demo/user-3.jpg" alt="">
-                                        <div class="details">
-                                            <div class="name">Hưng bựa xít</div>
-                                            <div class="message">
-                                                Excepteur Duis magna dolor!
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="components-messages.html" class='more-messages'>
-                                        Go to Message center <i class="icon-arrow-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown sett">
-                            <a href="#" class='dropdown-toggle' data-toggle="dropdown">
-                                <i class="icon-cog"></i>
-                            </a>
-                            <ul class="dropdown-menu pull-right theme-settings">
-                                <li>
-                                    <span>Layout-width</span>
-                                    <div class="version-toggle">
-                                        <a href="#" class='set-fixed'>Fixed</a>
-                                        <a href="#" class="active set-fluid">Fluid</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span>Topbar</span>
-                                    <div class="topbar-toggle">
-                                        <a href="#" class='set-topbar-fixed'>Fixed</a>
-                                        <a href="#" class="active set-topbar-default">Default</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <span>Sidebar</span>
-                                    <div class="sidebar-toggle">
-                                        <a href="#" class='set-sidebar-fixed'>Fixed</a>
-                                        <a href="#" class="active set-sidebar-default">Default</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
                         <li class='dropdown colo'>
-                            <a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-tint"></i></a>
+                            <a href="javascript:;" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-tint"></i></a>
                             <ul class="dropdown-menu pull-right theme-colors">
                                 <li class="subtitle">
                                     Predefined colors
@@ -187,36 +120,13 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class='dropdown language-select'>
-                            <a href="#" class='dropdown-toggle' data-toggle="dropdown"><img src="img/demo/flags/us.gif" alt=""><span>US</span></a>
-                            <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <a href="#"><img src="img/demo/flags/br.gif" alt=""><span>Brasil</span></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="img/demo/flags/de.gif" alt=""><span>Deutschland</span></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="img/demo/flags/es.gif" alt=""><span>España</span></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="img/demo/flags/fr.gif" alt=""><span>France</span></a>
-                                </li>
-                            </ul>
-                        </li>
                     </ul>
                     <?php if (about_user::is_login()): ?>
                         <div class="dropdown">
-                            <a  style="line-height: 27px" href="#" class='dropdown-toggle' data-toggle="dropdown">
+                            <a  style="line-height: 27px" href="javascript:;" class='dropdown-toggle' data-toggle="dropdown">
                                 <?php echo about_user::current_user()->name; ?>
                             </a>
                             <ul class="dropdown-menu pull-right">
-                                <li>
-                                    <a href="more-userprofile.html">Edit profile</a>
-                                </li>
-                                <li>
-                                    <a href="#">Account settings</a>
-                                </li>
                                 <li>
                                     <a href="#modal-logout" role="button" data-toggle="modal">
                                         <?php echo translate("Đăng xuất"); ?>
@@ -228,6 +138,9 @@
                         <div class="dropdown">
                             <a style="line-height: 27px" href="<?php echo URL ?>user/login"><?php echo translate('Đăng nhập') ?></a>
                         </div>
+                        <div class="dropdown">
+                            <a style="line-height: 27px" href="<?php echo URL ?>user/register"><?php echo translate('Đăng ký') ?></a>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>
@@ -235,12 +148,6 @@
 
         <div class="container-fluid <?php echo (isset($this->template->show_sidebar) && !$this->template->show_sidebar) ? 'nav-hidden' : '' ?>" id="content">
             <div id="left" class="">
-                <form action="search-results.html" method="GET" class='search-form'>
-                    <div class="search-pane">
-                        <input type="text" name="search" placeholder="Search here...">
-                        <button type="submit"><i class="icon-search"></i></button>
-                    </div>
-                </form>
                 <?php if (!isset($this->template->sidebar)) $this->template->sidebar = array() ?>
                 <?php foreach ($this->template->sidebar as $key => $value) : ?>
                     <div class="subnav subnav-hidden">
@@ -329,6 +236,6 @@
                                 <?php endforeach; ?>
                         </ul>
                         <div class="close-bread">
-                            <a href="#"><i class="icon-remove"></i></a>
+                            <a href="javascript:;"><i class="icon-remove"></i></a>
                         </div>
                     </div>
