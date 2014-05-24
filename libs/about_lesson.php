@@ -25,4 +25,19 @@ class about_lesson {
         return $result[0];
     }
 
+    public static function qry_all_level() {
+        $result = DB::search('t_level');
+        return $result;
+    }
+
+    public static function qry_course_lesson($course_id) {
+        $result = DB::search('t_lesson', array(), array('FK_COURSE' => $course_id));
+        return $result;
+    }
+
+    public static function qry_level_course($level_id) {
+        $result = DB::search('t_course', array(), array('FK_LEVEL' => $level_id));
+        return $result;
+    }
+
 }
