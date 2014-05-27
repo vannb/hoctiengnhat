@@ -29,7 +29,7 @@ class Bootstrap {
             return;
         }
         if (!method_exists($controller, $url[1])) {
-            new Error(translate('Không tìm thấy hàm'));
+            View::render_error('Không tìm thấy chức năng bạn yêu cầu');
             return;
         }
         if (!isset($url[2])) {

@@ -162,6 +162,10 @@ class DB {
             }
         }
 
+        if ($orderby) {
+            $sql .= ' ORDER BY ' . $orderby;
+        }
+        
         if ($offset || $limit) {
             if ($limit) {
                 $sql .= ' LIMIT ' . $limit . ' OFFSET ' . $offset;
@@ -170,9 +174,6 @@ class DB {
             }
         }
 
-        if ($orderby) {
-            $sql .= ' ORDER BY ' . $orderby;
-        }
         $sql.=';';
         if (!empty($executearr)) {
             $result = $db->GetAll($sql, $executearr);

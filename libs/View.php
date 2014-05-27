@@ -15,7 +15,7 @@ class View {
             $arr_level_course[$level['C_NAME']] = array();
             $arr_course = about_lesson::qry_level_course($level['PK_LEVEL']);
             foreach ($arr_course as $course) {
-                $arr_level_course[$level['C_NAME']][$course['C_NAME']] = $this->get_controller_url('lesson') . 'dsp_course_lesson/' . $course['PK_COURSE'];
+                $arr_level_course[$level['C_NAME']][$course['C_NAME']] = $this->get_controller_url('lessons') . 'dsp_course_lesson/' . $course['PK_COURSE'];
             }
         }
 

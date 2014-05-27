@@ -38,7 +38,7 @@
         </div>
         <div id="navigation">
             <div class="container-fluid">
-                <a href="javascript:;" id="brand">
+                <a href="<?php echo URL?>" id="brand">
                     <?php echo isset($this->template->brand) ? $this->template->brand : DEFAULT_BRAND ?>
                 </a>
                 <a href="javascript:;" style="
