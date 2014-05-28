@@ -8,7 +8,7 @@
         <div class="box">
             <div class="box-title">
                 <h3>
-                    <?php echo $this->v_lesson_name . ': ' . count($this->arr_vocab) . ' từ' ?>
+                    <?php echo $this->v_lesson_name . ': ' . count($this->arr_grammar) . ' ' . translate('ngữ pháp') ?>
                 </h3>
             </div>
             <div class="box-content">
@@ -36,10 +36,8 @@
                                     <fieldset>
                                         <?php echo empty($value['C_EXAMPLE']) ? '' : '<legend>' . translate('Ví dụ') . '</legend>' . '<p>' . $value['C_EXAMPLE'] . '</p>'; ?>
                                     </fieldset>
-
                                 </div>
                             </div>
-
                         </div>
                     <?php endforeach; ?>
                 </div>
