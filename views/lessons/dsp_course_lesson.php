@@ -10,7 +10,7 @@
                            background-color 0.3s ease; -ms-transition: font-size 0.3s ease, 
                            background-color 0.3s ease; transition: font-size 0.3s ease, 
                            background-color 0.3s ease; } 
-    .lesson_list li a:hover { font-size: 30px; background: #f6f6f6; } 
+    .lesson_list li a:hover { font-size: 30px;  } 
 </style> 
 
 <div class="lesson_list"> 
@@ -23,6 +23,9 @@
         ?>
     </ul> 
 </div>
+
+
+
 
 
 
