@@ -12,6 +12,10 @@ class about_lesson {
         return $result[0]['C_NAME'];
     }
 
+    public static function qry_course_name($course_id) {
+        $result = DB::search('t_course', array(), array('PK_COURSE' => $course_id));
+        return $result[0]['C_NAME'];
+    }
     public static function qry_course_by_lesson_id($lesson_id) {
         $result = DB::search(
                         't_lesson le join t_course co on le.FK_COURSE = co.PK_COURSE'

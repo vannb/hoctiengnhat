@@ -14,8 +14,8 @@ class vocabulary extends Controller {
 
     public function __construct() {
         parent::__construct('vocabulary');
-        $this->view->template->show_sidebar = 1;
-        $this->view->template->show_toggle_sidebar = 1;
+        $this->view->template->show_sidebar = 0;
+        $this->view->template->show_toggle_sidebar = 0;
     }
 
     public function dsp_lesson_vocabulary($lesson_id) {

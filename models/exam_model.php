@@ -21,7 +21,7 @@ class Exam_Model extends Model {
     }
 
     function qry_exam_vocab_question($exam_id) {
-        return DB::search('t_question',array(),array('FK_EXAM' => $exam_id,'FK_READING >' => 0),0,10,'RAND()');
+        return DB::search('t_question',array(),array('FK_EXAM' => $exam_id,'FK_READING' => 0),0,10,'RAND()');
     }
 
 }

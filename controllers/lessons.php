@@ -20,8 +20,7 @@ class Lessons extends Controller {
         //$this->view->template->sidebar = array();
         $this->view->template->show_sidebar = 1;
         $this->view->template->show_toggle_sidebar = 1;
-        $this->view->template->header = 'Trang chủ';
-        $this->view->template->title = 'Trang chủ';
+        $this->view->template->header = translate('Bài giảng');
         $this->view->template->breadcrumbs = array(translate('Bài giảng') => 'index.php');
     }
 
@@ -31,13 +30,18 @@ class Lessons extends Controller {
 
     function dsp_course_lesson($course_id) {
         //: hiển thị danh sách tất cả các bài theo khóa (khóa ở đây là Trung cấp, Sơ cấp...)
-        $this->view->lessonList = $this->model->qry_all_lessons_by_course($course_id);
+        $this->view->course_name = about_lesson::qry_course_name($course_id);
+        $this->view->arr_lesson = about_lesson::qry_course_lesson($course_id);
+        $this->view->template->breadcrumbs[$this->view->course_name] = null;
         $this->view->render('lessons/dsp_course_lesson');
     }
 
     function dsp_single_lesson($lesson_id) {
         //hiển thị các chức năng của từng bài (từ mới, ngữ pháp, test)
         $this->view->lesson_id = $lesson_id;
+        $this->view->lesson_name = about_lesson::qry_lesson_name($lesson_id);
+        $this->view->template->title = translate('Bài giảng'). ' - ' . $this->view->lesson_name;
+        $this->view->template->breadcrumbs[$this->view->lesson_name] = null;
         $this->view->render('lessons/dsp_single_lesson');
     }
 

@@ -11,18 +11,22 @@ class View {
         $this->name = $name;
         $arr_level = about_lesson::qry_all_level();
         $arr_level_course = array();
+        $arr_level_course_kanji = array();
+        
         foreach ($arr_level as $level) {
             $arr_level_course[$level['C_NAME']] = array();
+            $arr_level_course_kanji[$level['C_NAME']] = array();
             $arr_course = about_lesson::qry_level_course($level['PK_LEVEL']);
             foreach ($arr_course as $course) {
                 $arr_level_course[$level['C_NAME']][$course['C_NAME']] = $this->get_controller_url('lessons') . 'dsp_course_lesson/' . $course['PK_COURSE'];
+                $arr_level_course_kanji[$level['C_NAME']][$course['C_NAME']] = $this->get_controller_url('kanji') . 'dsp_course_lesson/' . $course['PK_COURSE'];
             }
         }
 
         $this->template->default_navbar = array(
             translate("Trang chủ") => URL . 'home',
             translate("Bài giảng") => $arr_level_course,
-            translate("Chữ Hán") => $this->get_controller_url('kanji'),
+            translate("Chữ Hán") => $arr_level_course_kanji,
             translate('Kiểm tra') => $this->get_controller_url('exam'),
             translate('Hỏi đáp') => $this->get_controller_url('qa'),
             translate('Tài liệu') => $this->get_controller_url('documents')
