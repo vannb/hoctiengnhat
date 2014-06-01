@@ -22,7 +22,7 @@ class Lessons extends Controller {
         $this->view->template->show_toggle_sidebar = 1;
         $this->view->template->header = 'Trang chủ';
         $this->view->template->title = 'Trang chủ';
-        $this->view->template->breadcrumbs = array(translate('Trang chủ') => 'index.php');
+        $this->view->template->breadcrumbs = array(translate('Bài giảng') => 'index.php');
     }
 
     function Index() {

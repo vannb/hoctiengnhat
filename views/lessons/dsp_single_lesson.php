@@ -5,7 +5,7 @@
 </style>
 
 <div class="container-fluid">
-    <h1>Chức năng</h1>
+    <h1>Bài <?php echo $this->lesson_id?></h1>
     <div class="row-fluid">
         <div class="span12">
             <ul class="tiles">
