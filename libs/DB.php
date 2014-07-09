@@ -186,7 +186,7 @@ class DB {
     public static function count($tablename, $keywords = array(), $condition = array()) {
         $db = self::get_instance();
         $executearr = array();
-        $sql = 'SELECT * FROM ' . $tablename . ' WHERE 1=1 ';
+        $sql = 'SELECT COUNT(*) FROM ' . $tablename . ' WHERE 1=1 ';
         if (!empty($keywords)) {
             foreach ($keywords as $key => $value) {
                 $sql.=' AND ' . $key . ' LIKE "%?%"';
@@ -222,11 +222,11 @@ class DB {
         }
         $sql.=';';
         if (!empty($executearr)) {
-            $result = $db->GetAll($sql, $executearr);
+            $result = $db->GetOne($sql, $executearr);
         } else {
-            $result = $db->GetAll($sql);
+            $result = $db->GetOne($sql);
         }
-        return $result;
+        return $result or 0;
     }
 
 }

@@ -22,7 +22,7 @@
         <link rel="shortcut icon" href="<?php echo PATH ?>img/favicon.ico" />
         <link rel="apple-touch-icon-precomposed" href="<?php echo PATH ?>img/apple-touch-icon-precomposed.png" />
     </head>
-    <body  data-layout-sidebar="fixed" data-layout-topbar="fixed">
+    <body data-layout-sidebar="fixed" data-layout-topbar="fixed">
         <div id="modal-logout" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -38,7 +38,7 @@
         </div>
         <div id="navigation">
             <div class="container-fluid">
-                <a href="<?php echo URL?>" id="brand">
+                <a href="<?php echo URL ?>" id="brand">
                     <?php echo isset($this->template->brand) ? $this->template->brand : DEFAULT_BRAND ?>
                 </a>
                 <a href="javascript:;" style="
@@ -46,7 +46,7 @@
                 echo (isset($this->template->show_toggle_sidebar) && !$this->template->show_toggle_sidebar) ? 'display: none' : 'display:block !important'
                 ?>"
                    class="toggle-nav" rel="tooltip"  data-container="body"
-                   data-placement="bottom" title="Ẩn/hiện thanh bên">
+                   data-placement="bottom" title="Ẩn/hiện lề trái">
                     <i class="icon-reorder"></i>
                 </a>
                 <ul class='main-nav'>
@@ -147,7 +147,7 @@
         </div>
 
         <div class="container-fluid <?php echo (isset($this->template->show_sidebar) && !$this->template->show_sidebar) ? 'nav-hidden' : '' ?>" id="content">
-            <div id="left" class="">
+            <div id="left" class="no-resize">
                 <?php if (!isset($this->template->sidebar)) $this->template->sidebar = array() ?>
                 <?php foreach ($this->template->sidebar as $key => $value) : ?>
                     <div class="subnav subnav-hidden">
@@ -231,7 +231,13 @@
                                     ?>
                                     <li>
                                         <i class="icon-angle-right"></i>
-                                        <a href="<?php if ($value != null and $value != '') echo $value ?>"><?php echo $key ?></a>
+                                        <a href="<?php
+                                        if ($value != null and $value != '') {
+                                            echo $value;
+                                        } else {
+                                            echo 'javascript:;';
+                                        }
+                                        ?>"><?php echo $key ?></a>
                                     </li>
                                 <?php endforeach; ?>
                         </ul>

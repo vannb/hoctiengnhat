@@ -24,7 +24,7 @@ class about_lesson {
                         , 0//offset
                         , 0//limit
                         , 0//orderby
-                        , 'PK_COURSE, co.C_NAME'//rows
+                        , 'PK_COURSE, co.C_NAME'
         );
         return $result[0];
     }
@@ -37,6 +37,10 @@ class about_lesson {
     public static function qry_course_lesson($course_id) {
         $result = DB::search('t_lesson', array(), array('FK_COURSE' => $course_id));
         return $result;
+    }
+    public static function qry_course_kanji_lesson($course_id) {
+        $db = DB::get_instance();
+        return $db->GetAll('SELECT *, PK_KANJI_LESSON AS PK_LESSON FROM t_kanji_lesson WHERE FK_COURSE = ?',array($course_id));
     }
 
     public static function qry_level_course($level_id) {

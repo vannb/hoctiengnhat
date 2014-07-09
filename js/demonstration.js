@@ -1,5 +1,3 @@
-// FLAT Theme v2.0
-
 var onlineUserArray = [255,455,385,759,500,284,581,684,255,455,385,759,500,293,585,342,684];
 function getUser(){
 	var min = 300,

@@ -12,36 +12,27 @@
                 </h3>
             </div>
             <div class="box-content">
-                <div class="accordion accordion-widget" id="accordion2">
+                <div class="accordion accordion-widget" id="accordion_grammar">
                     <?php $i = 0; ?>
                     <?php foreach ($this->arr_grammar as $key => $value) : ?>
-
-                        <div class="accordion-group">
-                            <div class="accordion-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#<?php echo $value['PK_GRAMMAR']; ?>">
-                                    <?php
-                                    $i++;
-                                    echo $i . ' . ' . $value['C_NAME'];
-                                    ?>
-                                </a>
-                            </div>
-                            <div id="<?php echo $value['PK_GRAMMAR']; ?>" class="accordion-body collapse">
-                                <div class="accordion-inner">
-                                    <fieldset>
-                                        <?php echo empty($value['C_GRAMMAR']) ? '' : '<legend>' . translate('Cấu trúc') . '</legend>' . '' . '<p>' . $value['C_GRAMMAR'] . ' </p>'; ?>
-                                    </fieldset>
-                                    <fieldset>
-                                        <?php echo empty($value['C_USAGE']) ? '' : '<legend>' . translate('Cách dùng') . '</legend>' . '' . '<p>' . $value['C_USAGE'] . '</p>'; ?>
-                                    </fieldset>
-                                    <fieldset>
-                                        <?php echo empty($value['C_EXAMPLE']) ? '' : '<legend>' . translate('Ví dụ') . '</legend>' . '<p>' . $value['C_EXAMPLE'] . '</p>'; ?>
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </div>
+                    <?php single_grammar($value)?>
                     <?php endforeach; ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    toggle_star_grammar = function(grammar_id, that) {
+        $.post('<?php echo $this->get_controller_url() ?>xhr_toggle_star', {'grammar_id': grammar_id})
+                .done(function(data) {
+                    console.log(data);
+                    $(that).removeClass('active');
+                    if (data == '1') {
+                        $(that).addClass('active');
+                    } else if (data == '-1') {
+                        window.location.href = '<?php echo $this->get_controller_url('user') . 'login' ?>';
+                    }
+                });
+    }
+</script>

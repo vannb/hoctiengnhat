@@ -12,24 +12,46 @@ class kanji extends Controller {
         $this->view->template->show_toggle_sidebar = 1;
     }
     
-    public function dsp_lesson_kanji($lesson_id) {
+    public function xhr_toggle_star() {
+        if (!about_user::is_login()) {
+            echo '-1';
+        } else {
+            echo $this->model->toggle_star();
+        }
+    }
+    function dsp_starred_kanji(){
+        about_user::require_login();
+        $this->view->v_lesson_name = 'Được đánh dấu';
+        $this->view->template->header = translate('Chữ Hán');
+        $this->view->template->title = translate('Chữ Hán');
+        $this->view->template->breadcrumbs = array(
+            translate('Chữ Hán') => null,
+            $this->view->v_lesson_name => $this->view->get_controller_url() . 'dsp_starred_kanji',
+        );
+
+        $this->view->arr_kanji = $this->model->qry_all_starred_kanji();
+        $this->view->render('kanji/dsp_lesson_kanji');
+    }
+    function dsp_course_kanji_lesson($course_id) {
+        $this->view->course_name = about_lesson::qry_course_name($course_id);
+        $this->view->arr_lesson = about_lesson::qry_course_kanji_lesson($course_id);
+        $this->view->template->breadcrumbs[$this->view->course_name] = null;
+        $this->view->render('lessons/dsp_course_lesson');
+    }
+    function dsp_single_lesson($lesson_id) {
         
         $this->view->template->header = translate('Chữ Hán');
         $this->view->template->title = translate('Chữ Hán');
         
         $v_course = about_lesson::qry_course_by_lesson_id($lesson_id);
-        $v_lesson_name = about_lesson::qry_lesson_name($lesson_id);
+        $this->view->lesson_name = about_lesson::qry_lesson_name($lesson_id);
         $this->view->template->breadcrumbs = array(
-            $v_course['C_NAME'] => $this->view->get_controller_url('lesson').'dsp_course_lesson/'.$v_course['PK_COURSE'],
-            $v_lesson_name => $this->view->get_controller_url('lesson').'dsp_single_lesson/'.$lesson_id,
-            translate('Chữ Hán') => null
+            translate('Chữ Hán') => null,
+            $v_course['C_NAME'] => $this->view->get_controller_url('lessons').'dsp_course_lesson/'.$v_course['PK_COURSE'],
+            $this->view->lesson_name => $this->view->get_controller_url('lessons').'dsp_single_lesson/'.$lesson_id
         );
         
-        $this->view->arr_kanji = $this->model->qry_all_kanji_by_lesson($lesson_id);
+        $this->view->arr_kanji = $this->model->qry_lesson_kanji($lesson_id);
         $this->view->render('kanji/dsp_lesson_kanji');
-    }
-    
-    public function dsp_single_kanji($kanji_id) {
-        
     }
 }

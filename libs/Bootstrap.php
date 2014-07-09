@@ -25,6 +25,10 @@ class Bootstrap {
                 }
                 $controller->$_GET['method']();
             }
+            if (!method_exists($controller, 'Index')) {
+                View::render_error('Không tìm thấy chức năng bạn yêu cầu');
+                return;
+            }
             $controller->Index();
             return;
         }

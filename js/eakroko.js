@@ -1,4 +1,3 @@
-// FLAT Theme v2.0
 (function( $ ){
 	$.fn.retina = function(retina_part) {
 		// Set default retina file part to '-2x'

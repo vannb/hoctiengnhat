@@ -19,21 +19,19 @@ class View {
             $arr_course = about_lesson::qry_level_course($level['PK_LEVEL']);
             foreach ($arr_course as $course) {
                 $arr_level_course[$level['C_NAME']][$course['C_NAME']] = $this->get_controller_url('lessons') . 'dsp_course_lesson/' . $course['PK_COURSE'];
-                $arr_level_course_kanji[$level['C_NAME']][$course['C_NAME']] = $this->get_controller_url('kanji') . 'dsp_course_lesson/' . $course['PK_COURSE'];
+                $arr_level_course_kanji[$level['C_NAME']][$course['C_NAME']] = $this->get_controller_url('kanji') . 'dsp_course_kanji_lesson/' . $course['PK_COURSE'];
             }
         }
 
         $this->template->default_navbar = array(
-            translate("Trang chủ") => URL . 'home',
-            translate("Bài giảng") => $arr_level_course,
+            translate("Học theo bài") => $arr_level_course,
             translate("Chữ Hán") => $arr_level_course_kanji,
-            translate('Kiểm tra') => $this->get_controller_url('exam'),
             translate('Hỏi đáp') => $this->get_controller_url('qa'),
-            translate('Tài liệu') => $this->get_controller_url('documents')
+            translate('Tài liệu') => $this->get_controller_url('document')
         );
         $this->template->default_title = DEFAULT_BRAND;
     }
-
+    
     public function get_controller_url($name = null) {
         if (empty($name)) {
             $name = $this->name;
