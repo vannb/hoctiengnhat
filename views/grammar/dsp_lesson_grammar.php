@@ -13,7 +13,6 @@
             </div>
             <div class="box-content">
                 <div class="accordion accordion-widget" id="accordion_grammar">
-                    <?php $i = 0; ?>
                     <?php foreach ($this->arr_grammar as $key => $value) : ?>
                     <?php single_grammar($value)?>
                     <?php endforeach; ?>
@@ -24,7 +23,7 @@
 </div>
 <script>
     toggle_star_grammar = function(grammar_id, that) {
-        $.post('<?php echo $this->get_controller_url() ?>xhr_toggle_star', {'grammar_id': grammar_id})
+        $.post('<?php echo $this->get_controller_url('grammar') ?>xhr_toggle_star', {'grammar_id': grammar_id})
                 .done(function(data) {
                     console.log(data);
                     $(that).removeClass('active');

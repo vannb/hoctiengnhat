@@ -1,6 +1,5 @@
 <?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
-
 class exam extends Controller
 {
     function __construct()
@@ -96,7 +95,6 @@ class exam extends Controller
         $this->view->template->breadcrumbs = array(
             $v_course_info['C_NAME'] => $this->view->get_controller_url('lessons') . 'dsp_course_lesson/' . $v_course_info['PK_COURSE'],
             $this->view->lesson_name => $this->view->get_controller_url('lessons') . 'dsp_single_lesson/' . $lesson_id,
-            translate("Kiểm tra") => $this->view->get_controller_url('exam') . 'dsp_lesson_exam/' . $lesson_id,
             translate("Xếp hạng") => null
         );
         $this->view->arr_all_rank = $this->model->qry_all_rank($v_exam_info['PK_EXAM']);

@@ -1,6 +1,5 @@
 <?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
-
 class User_Model extends Model {
 
     function __construct() {

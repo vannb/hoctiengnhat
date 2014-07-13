@@ -1,17 +1,5 @@
 <?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Home
- *
- * @author Loving
- */
 class User extends Controller {
 
     public function __construct() {

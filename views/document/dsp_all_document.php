@@ -25,7 +25,7 @@
                     <tbody>
                         <?php foreach ($this->arr_all_document as $document): ?>
                             <tr>
-                                <td><?php echo $document['C_NAME'] ?></td>
+                                <td><?php echo $document['C_NAME'].'.'.$document['C_EXT'] ?></td>
                                 <td class='hidden-768'><?php echo $document['C_UPLOADER_NAME'] ?></td>
                                 <td class='hidden-1024'><?php echo date_format(new DateTime($document['C_UPLOAD_DATE']), 'd-m-Y') ?></td>
                                 <td>

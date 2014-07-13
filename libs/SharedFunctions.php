@@ -94,6 +94,39 @@ function translate($text, $force_language = false)
     return MultiLang::translate($text);
 }
 
+function single_vocab($value)
+{
+    echo '<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term_wrap">
+                <div class="single_term" data-html="true"
+                rel="popover" data-trigger="hover click"
+                data-placement="bottom" title="' . $value["C_JAPANESE"];
+    echo (!empty($value['C_TYPE']) ? ' (' . $value["C_TYPE"] . ')' : '');
+    echo '" data-content="<h4>' . translate('Ý nghĩa') . ':</h4>' . $value["C_VIETNAMESE"];
+    echo ((!empty($value["C_IMAGE_LOCATION"]) && is_file($value["C_IMAGE_LOCATION"])) ? "<img src='" . $value["C_IMAGE_LOCATION"] . "'/>" : '');
+    echo (!empty($value['C_EXAMPLE']) ? '<h4>' . translate('Ví dụ') . ':</h4>' . $value["C_EXAMPLE"] : '');
+    echo '">
+        <div class = "word japanese col-xs-3">' . $value['C_JAPANESE'] . '</div>
+        <div class = "word vietnamese col-xs-7">' . $value['C_VIETNAMESE'] . '</div>
+        <div class = "term_action col-xs-2">
+        <a href = "javascript:;"
+        onclick = "toggle_star_vocab(' . $value['PK_VOCABULARY'] . ', this)"
+        class = "sel-star' . (($value['PK_STARRED']) ? ' active ' : '') . '"
+        rel = "tooltip" data-container = "body"
+        data-placement = "top" title = "' . translate("Đánh dấu") . '">
+        <i class = "icon-star"></i>
+        </a>
+        <a href = "' . get_controller_url('vocabulary') . 'dsp_starred_vocabulary"
+        rel = "tooltip" data-container = "body" data-placement = "top"
+        title = "' . translate("Xem tất cả đánh dấu") . '"
+        >(' . translate("Tất cả") . ')
+        </a>
+        </div>
+        <div>
+        </div>
+        </div>
+        </div>';
+}
+
 function single_kanji($value)
 {
     echo '<div class="accordion-group" style="margin-right: 80px">
@@ -115,7 +148,7 @@ function single_kanji($value)
         <div class="accordion-heading">
             <div class="accordion-toggle" data-toggle="collapse"
             data-parent="#accordion_kanji" href="#kanji_' . $value["PK_KANJI"] . '">'
-    . $value["C_CHARACTER"] . '(' . $value['C_SINO_VIETNAMESE'] . ')'
+    . $value["C_CHARACTER"] . ' - ' . $value['C_SINO_VIETNAMESE']
     . '</div>
         </div>
         <div id="kanji_' . $value["PK_KANJI"] . '" class="accordion-body collapse">
@@ -203,4 +236,5 @@ function single_grammar($value)
         </div>
     </div>';
 }
+
 ?>

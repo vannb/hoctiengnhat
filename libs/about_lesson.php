@@ -11,6 +11,10 @@ class about_lesson {
         $result = DB::search('t_lesson', array(), array('PK_LESSON' => $lesson_id));
         return $result[0]['C_NAME'];
     }
+    public static function qry_kanji_lesson_name($lesson_id) {
+        $result = DB::search('t_kanji_lesson', array(), array('PK_KANJI_LESSON' => $lesson_id));
+        return $result[0]['C_NAME'];
+    }
 
     public static function qry_course_name($course_id) {
         $result = DB::search('t_course', array(), array('PK_COURSE' => $course_id));
@@ -21,6 +25,18 @@ class about_lesson {
                         't_lesson le join t_course co on le.FK_COURSE = co.PK_COURSE'
                         , array()
                         , array('PK_LESSON' => $lesson_id)
+                        , 0//offset
+                        , 0//limit
+                        , 0//orderby
+                        , 'PK_COURSE, co.C_NAME'
+        );
+        return $result[0];
+    }
+    public static function qry_course_by_kanji_lesson_id($lesson_id) {
+        $result = DB::search(
+                        't_kanji_lesson le join t_course co on le.FK_COURSE = co.PK_COURSE'
+                        , array()
+                        , array('PK_KANJI_LESSON' => $lesson_id)
                         , 0//offset
                         , 0//limit
                         , 0//orderby

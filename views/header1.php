@@ -3,7 +3,8 @@
 <html>
     <head>
         <title>
-            <?php echo isset($this->template->title) ? $this->template->title : $this->template->default_title; ?>
+            <?php echo DEFAULT_BRAND?> - 
+            <?php echo isset($this->template->title) ? $this->template->title : ''; ?>
         </title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -147,7 +148,7 @@
         </div>
 
         <div class="container-fluid <?php echo (isset($this->template->show_sidebar) && !$this->template->show_sidebar) ? 'nav-hidden' : '' ?>" id="content">
-            <div id="left" class="no-resize">
+            <div id="left" class="no-resize full force-full">
                 <?php if (!isset($this->template->sidebar)) $this->template->sidebar = array() ?>
                 <?php foreach ($this->template->sidebar as $key => $value) : ?>
                     <div class="subnav subnav-hidden">

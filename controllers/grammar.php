@@ -1,7 +1,5 @@
 <?php defined('SERVER_ROOT') or die('No direct script access allowed'); ?>
 <?php
-
-
 class grammar extends Controller{
 
     function __construct() {
@@ -21,9 +19,9 @@ class grammar extends Controller{
     
     function dsp_starred_grammar(){
         about_user::require_login();
-        $this->view->v_lesson_name = 'Được đánh dấu';
+        $this->view->v_lesson_name = translate('Được đánh dấu');
         $this->view->template->header = translate('Ngữ pháp');
-        $this->view->template->title = translate('Ngữ pháp');
+        $this->view->template->title = translate('Ngữ pháp').' - '.$this->view->v_lesson_name;
         $this->view->template->breadcrumbs = array(
             translate('Ngữ pháp') => null,
             $this->view->v_lesson_name => $this->view->get_controller_url() . 'dsp_starred_grammar',
@@ -36,7 +34,7 @@ class grammar extends Controller{
     public function dsp_lesson_grammar($lesson_id){
         $this->view->arr_course_info = about_lesson::qry_course_by_lesson_id($lesson_id);
         $this->view->v_lesson_name = about_lesson::qry_lesson_name($lesson_id);
-        $this->view->template->title = translate('Ngữ pháp');
+        $this->view->template->title = $this->view->v_lesson_name.': '.translate('Ngữ pháp');
         $this->view->template->header = translate('Ngữ pháp');
         $this->view->template->breadcrumbs = array(
             $this->view->arr_course_info['C_NAME'] => $this->view->get_controller_url('lessons').'dsp_course_lesson/'.$this->view->arr_course_info['PK_COURSE'],
