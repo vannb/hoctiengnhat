@@ -2,7 +2,7 @@
     <div class="span12">
         <div class="box">
             <div class="box-title">
-                <h3><?php echo translate('Xếp hạng').': '.$this->lesson_name;?></h3>
+                <h3><?php echo translate('Xếp hạng theo lần làm bài đầu tiên').' - '.$this->lesson_name;?></h3>
             </div>
         </div>
         <div class="box-content">

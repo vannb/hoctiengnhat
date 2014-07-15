@@ -70,7 +70,7 @@
     </div>
 </div>
 <script>
-    rate = function(document_id, rating, that) {
+    rate_document = function(document_id, rating, that) {
         $.post('<?php echo $this->get_controller_url() ?>xhr_rate_document', {'document_id': document_id, 'rating': rating})
                 .done(function(data) {
                     console.log(data);

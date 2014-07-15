@@ -71,7 +71,6 @@ class document_model extends Model
     {
         //Upload file
         $count = count($_FILES['uploader']['name']);
-        var_dump($_FILES);
         if ($_FILES['uploader']['error'] == 0)
         {
             $v_file_name = $_FILES['uploader']['name'];

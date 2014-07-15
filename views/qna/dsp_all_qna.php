@@ -19,7 +19,7 @@
                     . '<th  class="center hidden-768" style="width:80px">' . translate("Trả lời") . '</th>'
                     . '<th  class="center hidden-768" style="width:120px">' . translate("Đánh giá") . '</th>'
                     . '<th>' . translate("Tiêu đề") . '</th>'
-                    . '<th>' . translate("Được hỏi lúc") . '</th>';
+                    . '<th style="width:200px">' . translate("Được hỏi lúc") . '</th>';
                     if (about_user::is_admin()):
                         echo '<th class="center">' . translate('Xóa') . '</th>';
                     endif;

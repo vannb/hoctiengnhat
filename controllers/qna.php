@@ -73,7 +73,6 @@ class Qna extends Controller
         {
             $qna_id = $result;
         }
-        var_dump($qna_id);
         redirect_popup_msg($this->view->get_controller_url() . 'dsp_single_qna/' . $qna_id, translate('Bài của bạn đã được gửi'));
     }
 

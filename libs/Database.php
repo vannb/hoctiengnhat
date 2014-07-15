@@ -20,10 +20,6 @@ class Database extends PDO {
         $placeholderlist = implode(',', $placeholderarr);
         $valuelist = implode(',', $valuearr);
         $sth = $this->prepare('INSERT INTO ' . $tablename . '(' . $keylist . ') values(' . $placeholderlist . ');');
-//        echo 'INSERT INTO ' . $tablename . '(' . $keylist . ') values(' . $placeholderlist . ');';
-//        echo '<pre>';
-//        var_dump($executearr);
-//        echo '</pre>';
         $sth->execute($executearr);
         $last = $this->lastInsertId();
         return $last;
@@ -44,11 +40,6 @@ class Database extends PDO {
 
         $conditionlist = implode(' AND ', $conditionarr);
         $sth = $this->prepare('UPDATE ' . $tablename . ' SET ' . $setlist . ' WHERE ' . $conditionlist . ';');
-//        echo 'UPDATE ' . $tablename . ' SET ' . $setlist . ' WHERE ' . $conditionlist . ';';
-//        echo '<pre>';
-//        var_dump($executearr);
-//        echo '</pre>';
-//        exit;
         return $sth->execute($executearr);
     }
 
@@ -111,11 +102,8 @@ class Database extends PDO {
             $limitstr = '';
 
         $sth = $this->prepare('SELECT * FROM ' . $tablename . $conditionlist . $limitstr . ';');
-        // echo 'SELECT * FROM ' . $tablename . $conditionlist . $limitstr . ';</br>';
 
         if (!empty($executearr)) {
-            // var_dump($executearr);
-            //exit;
             $sth->execute($executearr);
         } else {
             $sth->execute();

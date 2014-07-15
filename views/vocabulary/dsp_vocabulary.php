@@ -30,7 +30,7 @@
 <div class="clearfix"></div>
 <div class="box">
     <div class="box-title">
-        <h3><?php echo $this->v_lesson_name . ': ' . count($this->arr_vocab) . ' từ' ?></h3>
+        <h3><i class="icon-book"></i><?php echo $this->v_lesson_name . ': ' . count($this->arr_vocab) . ' từ' ?></h3>
         <div class="btn-group pull-right">
             <a href="javascript:;" class="btn btn-large" onclick="grid_view()" rel="tooltip" title="<?php echo translate('Lưới') ?>"><i class="icon-th"></i></a>
             <a href="javascript:;" class="btn btn-large" onclick="list_view()" rel="tooltip" title="<?php echo translate('Danh sách') ?>"><i class="icon-th-list"></i></a>

@@ -30,7 +30,7 @@
     <div class="span12">
         <div class="box">
             <div class="box-title">
-                <h3><?php echo translate("Từ vựng được quan tâm"); ?></h3>
+                <h3><i class="icon-book"></i><?php echo translate("Từ vựng được quan tâm"); ?></h3>
                 <div class="btn-group pull-right">
                     <a href="javascript:;" class="btn btn-large" onclick="grid_view()" rel="tooltip" title="<?php echo translate('Lưới') ?>"><i class="icon-th"></i></a>
                     <a href="javascript:;" class="btn btn-large" onclick="list_view()" rel="tooltip" title="<?php echo translate('Danh sách') ?>"><i class="icon-th-list"></i></a>
@@ -45,7 +45,8 @@
         <div class="box">
             <div class="box-title">
                 <h3>
-                    <?php echo translate("Ngữ pháp được quan tâm"); ?>
+                    漢 
+                    <?php echo translate("Chữ Hán được quan tâm"); ?>
                 </h3>
             </div>
             <div class="box-content">
@@ -59,6 +60,7 @@
         <div class="box">
             <div class="box-title">
                 <h3>
+                    <i class='icon-list'></i>
                     <?php echo translate("Ngữ pháp được quan tâm"); ?>
                 </h3>
             </div>
@@ -160,6 +162,17 @@
                 });
     }
 
+    rate_document = function(document_id, rating, that) {
+        $.post('<?php echo $this->get_controller_url('document') ?>xhr_rate_document', {'document_id': document_id, 'rating': rating})
+                .done(function(data) {
+                    console.log(data);
+                    if (data == '-1') {
+                        window.location.href = '<?php echo $this->get_controller_url('user') . 'login' ?>';
+                    } else if (data == '1') {
+                        location.reload();
+                    }
+                });
+    }
     toggle_star_kanji = function(kanji_id, that) {
         $.post('<?php echo $this->get_controller_url('kanji') ?>xhr_toggle_star', {'kanji_id': kanji_id})
                 .done(function(data) {

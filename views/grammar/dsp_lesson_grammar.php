@@ -8,6 +8,7 @@
         <div class="box">
             <div class="box-title">
                 <h3>
+                    <i class='icon-list'></i>
                     <?php echo $this->v_lesson_name . ': ' . count($this->arr_grammar) . ' ' . translate('ngữ pháp') ?>
                 </h3>
             </div>

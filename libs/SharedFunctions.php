@@ -284,7 +284,7 @@ function single_document($document)
         }
         echo '<a style="color:' . (($active) ? '#f8a31f' : '#aaa')
         . '"rel="tooltip"  data-container="body" href="javascript:;"'
-        . 'onclick="rate(' . $document['PK_DOCUMENT'] . ', ' . $i . ', this)"'
+        . 'onclick="rate_document(' . $document['PK_DOCUMENT'] . ', ' . $i . ', this)"'
         . 'data-placement="top" title="' . $i . " " . translate("sao") . '">'
         . '<i class="' . (($active) ? 'icon-star' : 'icon-star-empty') . '"></i>'
         . '</a>';
@@ -292,8 +292,8 @@ function single_document($document)
     echo '(' . number_format($document['AVG_RATING'], 1)
     . '<i class="icon-star"></i>, '
     . (($document['COUNT_RATED_USER']) ? $document['COUNT_RATED_USER'] : 0)
-    . '<i class="icon-user"></i>)
-                        </td>';
+    . '<i class="icon-user"></i>)'
+    . '</td>';
     if (about_user::is_admin()):
         echo '<td>';
         if ($document['C_SHOWN'] != 1):

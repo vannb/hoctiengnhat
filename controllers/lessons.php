@@ -13,9 +13,9 @@ class Lessons extends Controller
 
     function dsp_course_lesson($course_id)
     {
-        $this->view->template->title = $this->view->course_name;
         $this->view->course_name = about_lesson::qry_course_name($course_id);
         $this->view->arr_lesson = about_lesson::qry_course_lesson($course_id);
+        $this->view->template->title = $this->view->course_name;
         $this->view->template->breadcrumbs = array(
             $this->view->course_name => null
         );
