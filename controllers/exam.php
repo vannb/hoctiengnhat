@@ -113,7 +113,10 @@ class exam extends Controller
         $v_exam_info = $this->model->qry_exam_by_lesson($lesson_id);
         $this->view->arr_multi_choices_question = $this->model->qry_exam_multi_choices_question($v_exam_info['PK_EXAM']);
         $this->view->arr_reading = $this->model->qry_exam_reading($v_exam_info['PK_EXAM']);
-        $this->view->arr_reading['question'] = $this->model->qry_reading_question($this->view->arr_reading['PK_READING']);
+        if ($this->view->arr_reading)
+        {
+            $this->view->arr_reading['question'] = $this->model->qry_reading_question($this->view->arr_reading['PK_READING']);
+        }
         $this->view->template->breadcrumbs = array(
             $v_course_info['C_NAME'] => $this->view->get_controller_url('lessons') . 'dsp_course_lesson/' . $v_course_info['PK_COURSE'],
             $this->view->lesson_name => $this->view->get_controller_url('lessons') . 'dsp_single_lesson/' . $lesson_id,

@@ -226,7 +226,8 @@ class DB {
         } else {
             $result = $db->GetOne($sql);
         }
-        return $result or 0;
+        if(!$result) return 0;
+        return $result;
     }
 
 }

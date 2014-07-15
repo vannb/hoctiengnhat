@@ -101,9 +101,9 @@ function single_vocab($value)
                 rel="popover" data-trigger="hover click"
                 data-placement="bottom" title="' . $value["C_JAPANESE"];
     echo (!empty($value['C_TYPE']) ? ' (' . $value["C_TYPE"] . ')' : '');
-    echo '" data-content="<h4>' . translate('Ý nghĩa') . ':</h4>' . $value["C_VIETNAMESE"];
-    echo ((!empty($value["C_IMAGE_LOCATION"]) && is_file($value["C_IMAGE_LOCATION"])) ? "<img src='" . $value["C_IMAGE_LOCATION"] . "'/>" : '');
-    echo (!empty($value['C_EXAMPLE']) ? '<h4>' . translate('Ví dụ') . ':</h4>' . $value["C_EXAMPLE"] : '');
+    echo '" data-content="' . $value["C_VIETNAMESE"];
+    echo (!empty($value['C_EXAMPLE']) ? '<h5>' . translate('Ví dụ') . ':</h5>' . $value["C_EXAMPLE"] : '');
+    echo ((!empty($value["C_IMAGE_LOCATION"]) && is_file('img/vocabulary/' . $value["C_IMAGE_LOCATION"])) ? "<h5>" . translate('Hình ảnh') . "</h5><img src='img/vocabulary/" . $value["C_IMAGE_LOCATION"] . "'/>" : '');
     echo '">
         <div class = "word japanese col-xs-3">' . $value['C_JAPANESE'] . '</div>
         <div class = "word vietnamese col-xs-7">' . $value['C_VIETNAMESE'] . '</div>
@@ -152,34 +152,34 @@ function single_kanji($value)
     . '</div>
         </div>
         <div id="kanji_' . $value["PK_KANJI"] . '" class="accordion-body collapse">
-            <div class="accordion-inner">
-                <fieldset>';
+            <div class="accordion-inner">';
     echo (empty($value['C_WRITE_IMAGE_LOCATION']) || !is_file('img/kanji/' . $value['C_WRITE_IMAGE_LOCATION'])) ? "" :
-            "<legend>"
+            "<fieldset><legend>"
             . translate('Cách viết')
             . "</legend>"
             . '<img src="img/kanji/' . $value['C_WRITE_IMAGE_LOCATION'] . '" class="img-responsive">'
-            . '</fieldset>
-                <fieldset>';
+            . '</fieldset>';
     echo empty($value["C_ON"]) ? "" :
-            "<legend>" . translate("Âm Ôn")
+            "<fieldset>"
+            . "<legend>" . translate("Âm Ôn")
             . "</legend>"
             . "<p>" . nl2br($value["C_ON"]) . "</p>"
-            . '</fieldset>
-                <fieldset>';
+            . '</fieldset>';
     echo empty($value["C_KUN"]) ? '' :
-            '<legend>'
+            '<fieldset>'
+            . '<legend>'
             . translate('Âm Kun')
             . '</legend>'
             . '<p>' . nl2br($value['C_KUN']) . '</p>'
             . '</fieldset>';
-    echo empty($value["C_COMPOUND_WORD"]) ? '' :
-            '<legend>'
+    echo (empty($value["C_COMPOUND_WORD"]) || strlen($value["C_COMPOUND_WORD"]) <= 3) ? '' :
+            '<fieldset>'
+            . '<legend>'
             . translate('Từ ghép')
             . '</legend>'
             . '<p>' . nl2br($value['C_COMPOUND_WORD']) . '</p>'
-            . '</fieldset>
-            </div>
+            . '</fieldset>';
+    echo '</div>
         </div>
     </div>';
 }
@@ -235,6 +235,46 @@ function single_grammar($value)
             </div>
         </div>
     </div>';
+}
+
+function single_qna($value)
+{
+    $value['COUNT_ANSWER'] = isset($value['COUNT_ANSWER']) ? $value['COUNT_ANSWER'] : 0;
+    $value['COUNT_VOTE'] = isset($value['COUNT_VOTE']) ? $value['COUNT_VOTE'] : 0;
+    $value['SUM_VOTE'] = isset($value['SUM_VOTE']) ? $value['SUM_VOTE'] : 0;
+    $vote_up = ($value['COUNT_VOTE'] + $value['SUM_VOTE']) / 2;
+    $vote_down = ($value['COUNT_VOTE'] - $value['SUM_VOTE']) / 2;
+    echo '<li class=left>'
+    . '<div class="image" style="text-align: center">'
+    . '<button class="btn" onclick="vote_qna(' . $value['PK_QNA'] . ',1,this)">'
+    . '<i class="icon-arrow-up"></i>'
+    . '</button>'
+    . '<h3></h3>'
+    . '<div style="font-size: x-large" class="sum_vote">' . $value['SUM_VOTE'] . '</div>'
+    . ' <small>'
+    . '(' . '<span class="vote_up">' . $vote_up . '</span>'
+    . '<i style="color:green" class="icon-arrow-up"></i>'
+    . '<span class="vote_down">' . $vote_down . '</span>'
+    . '<i style="color:red" class=" icon-arrow-down"></i>)'
+    . '</small>'
+    . '<h3></h3>'
+    . '<button class="btn" onclick="vote_qna(' . $value['PK_QNA'] . ',-1,this)">'
+    . '<i class="icon-arrow-down"></i>'
+    . '</button>'
+    . '</div>'
+    . '<div class="message">'
+    . '<span class = "name">' . $value['C_TITLE'] . '</span>'
+    . '<hr>'
+    . '<p>' . nl2br($value['C_CONTENT']) . '</p>'
+    . '<hr>'
+    . '<span class = "time">'
+    . date_format(new DateTime($value['C_DATE_TIME']), 'H:i:s d/m/Y')
+    . ' ' . translate('bởi')
+    . ' '
+    . $value['C_NAME']
+    . '</span>'
+    . '</div>'
+    . '</li>';
 }
 
 ?>

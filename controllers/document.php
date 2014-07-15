@@ -22,7 +22,6 @@ class Document extends Controller
     {
         $this->view->arr_all_document = $this->model->qry_all_document();
         $this->view->count_all_document = $this->model->count_all_document();
-        var_dump($this->view->count_all_document);
         $this->view->render('document/dsp_all_document');
     }
 

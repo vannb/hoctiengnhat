@@ -50,20 +50,14 @@
                                    required="true">
                         </div>
                     </div>
-                    <div class="submit">
-                        <div class="remember">
-                            <input type="checkbox" name="remember" class='icheck-me'
-                                   data-skin="square" data-color="blue" id="remember">
-                            <label for="remember">
-                                <?php echo translate("Ghi nhớ") ?>
-                            </label>
-                        </div>
+                    <div>
                         <input type="submit" value="<?php echo translate("Đăng nhập")?>"
-                               class='btn btn-primary'>
+                               class='btn btn-primary pull-left'>
+                        <a href="<?php echo $this->get_controller_url().'register'?>" class="pull-right btn"><?php echo translate("Đăng ký");?></a>
                     </div>
                 </form>
                 <div class="forget">
-                    <a href="<?php echo $this->get_controller_url('home').''?>"><span><?php echo translate('Trang chủ') ?></span></a>
+                    <a href="<?php echo $this->get_controller_url('home').''?>"><span><i class="icon-home"></i><?php echo translate('Trang chủ') ?></span></a>
                 </div>
             </div>
         </div>

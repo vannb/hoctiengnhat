@@ -2,7 +2,7 @@
 <style>
     .single_term{overflow: hidden;cursor: pointer;position: relative}
     .single_term{margin: 15px}
-    .word.japanese{font-size: large}
+    .word.japanese{font-size: medium}
     .word.vietnamese{font-size: small}
     .term_wrap{
         -webkit-transition: width 0.3s ease-in-out;
@@ -39,41 +39,6 @@
     <div id="all_terms" class="row-fluid list box-content">
         <?php foreach ($this->arr_vocab as $key => $value) : ?>
             <?php single_vocab($value) ?>
-            <!--            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term_wrap">
-                            <div class="single_term"
-            <?php if (!empty($value['C_IMAGE_LOCATION']) || !empty($value['C_EXAMPLE'])): ?>
-                                         data-html="true" rel="popover" data-trigger="hover click"
-                                         data-placement="bottom" title="<?php
-                echo $value['C_JAPANESE'];
-                echo!empty($value['C_TYPE']) ? ' (' . $value['C_TYPE'] . ')' : ''
-                ?>
-                                         "
-                                         data-content="
-                <?php echo $value['C_VIETNAMESE'] ?>
-                <?php echo!empty($value['C_IMAGE_LOCATION']) ? "<img src='" . $value['C_IMAGE_LOCATION'] . "'/>" : '' ?>
-                <?php echo!empty($value['C_EXAMPLE']) ? '<h4>' . translate('Ví dụ') . ':</h4>' . $value['C_EXAMPLE'] : '' ?>
-                                         "
-            <?php endif; ?>>
-                                <div class="word japanese col-xs-3"><?php echo $value['C_JAPANESE'] ?></div>
-                                <div class="word vietnamese col-xs-7"><?php echo $value['C_VIETNAMESE'] ?></div>
-                                <div class="term_action col-xs-2" style="height: 100%">
-                                    <a href="javascript:;"
-                                       onclick="toggle_star(<?php echo $value['PK_VOCABULARY'] ?>, this)"
-                                       class="sel-star<?php echo ($value['PK_STARRED']) ? ' active ' : '' ?>"
-                                       rel="tooltip"  data-container="body"
-                                       data-placement="top" title="<?php echo translate("Đánh dấu") ?>">
-                                        <i class="icon-star"></i>
-                                    </a>
-                                    <a href="<?php echo $this->get_controller_url() ?>dsp_starred_vocabulary"
-                                       rel="tooltip"  data-container="body" data-placement="top" 
-                                       title="<?php echo translate("Xem tất cả đánh dấu") ?>"
-                                       >(<?php echo translate("Tất cả"); ?>)
-                                    </a>
-            
-                                </div>
-                                <div></div>
-                            </div>
-                        </div>-->
         <?php endforeach; ?>
     </div>
 </div>
