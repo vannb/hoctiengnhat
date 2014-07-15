@@ -51,7 +51,7 @@ class document_model extends Model
 
     function count_all_document()
     {
-        return DB::count('t_document');
+        return DB::count('t_document', array(), (!about_user::is_admin()) ? array('C_SHOWN' => 1) : array());
     }
 
     function qry_single_document($v_document_id)

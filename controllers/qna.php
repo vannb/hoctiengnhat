@@ -28,6 +28,16 @@ class Qna extends Controller
         $this->view->render('qna/dsp_all_qna');
     }
 
+    function delete_qna($v_qna_id)
+    {
+        if (!about_user::is_admin())
+        {
+            return;
+        }
+        $this->model->delete_qna($v_qna_id);
+        header('location: ' . $this->view->get_controller_url());
+    }
+
     function dsp_single_qna($v_qna_id = 0)
     {
         $this->view->v_qna_id = $v_qna_id;

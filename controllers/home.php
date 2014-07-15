@@ -6,8 +6,6 @@ class Home extends Controller
     public function __construct()
     {
         parent::__construct('home');
-        //$this->view->template->navbar = array('1' => array('1' => array('1'=>'1')));
-        //$this->view->template->sidebar = array();
         $this->view->template->show_sidebar = 1;
         $this->view->template->show_toggle_sidebar = 1;
         $this->view->template->title = translate('Trang chủ');

@@ -70,6 +70,69 @@
                 </div>
             </div>
         </div>
+        <div class="box">
+            <div class="box-title">
+                <h3>
+                    <?php echo translate('Hỏi đáp mới nhất') ?>
+                </h3>
+                <div class="pull-right">
+                    <a class="btn btn-success"
+                       href="<?php echo $this->get_controller_url('qna') . 'dsp_single_qna/0' ?>">
+                           <?php echo translate("Câu hỏi mới"); ?>
+                    </a>
+                </div>
+            </div>
+            <div class="box-content nopadding">
+                <table class="table">
+                    <?php
+                    echo '<thead>'
+                    . '<th  class="center hidden-768" style="width:80px">' . translate("Trả lời") . '</th>'
+                    . '<th  class="center hidden-768" style="width:120px">' . translate("Đánh giá") . '</th>'
+                    . '<th>' . translate("Tiêu đề") . '</th>'
+                    . '<th>' . translate("Được hỏi lúc") . '</th>';
+                    if (about_user::is_admin()):
+                        echo '<th class="center">' . translate('Xóa') . '</th>';
+                    endif;
+                    echo '<thead>';
+                    foreach ($this->arr_new_qna as $value):
+                        single_qna_list($value);
+                    endforeach;
+                    ?>
+                </table>
+            </div>
+            <div class="box">
+                <div class="box-title">
+                    <h3>
+                        <i class="icon-cloud-download"></i>
+                        <?php echo translate('Tài liệu mới') ?>
+                    </h3>
+                </div>
+                <div class="box-content nopadding">
+                    <table class="table table-hover table-nomargin">
+                        <thead>
+                            <tr>
+                                <th><?php echo translate('Tên tài liệu') ?></th>
+                                <th class='hidden-768'><?php echo translate('Người đóng góp'); ?></th>
+                                <th class='hidden-1024'><?php echo translate('Ngày tải lên'); ?></th>
+                                <th><?php echo translate('Tải về') ?></th>
+                                <th class='hidden-768'><?php echo translate('Đánh giá') ?></th>
+                                    <?php if (about_user::is_admin()): ?>
+                                    <th><?php echo translate('Duyệt') ?></th>
+                                    <th><?php echo translate('Xóa') ?></th>
+                                <?php endif; ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($this->arr_new_document as $document):
+                                single_document($document);
+                            endforeach;
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script>
@@ -109,7 +172,7 @@
                     }
                 });
     }
-    
+
     function grid_view() {
         $('#all_terms').removeClass('list').addClass('grid');
     }

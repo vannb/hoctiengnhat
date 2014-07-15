@@ -23,47 +23,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($this->arr_all_document as $document): ?>
-                            <tr <?php if ($document['C_SHOWN'] != 1) echo 'class="success"' ?>>
-                                <td><?php echo $document['C_NAME'] . '.' . $document['C_EXT'] ?></td>
-                                <td class='hidden-768'><?php echo $document['C_UPLOADER_NAME'] ?></td>
-                                <td class='hidden-1024'><?php echo date_format(new DateTime($document['C_UPLOAD_DATE']), 'd-m-Y') ?></td>
-                                <td>
-                                    <a href="<?php echo $this->get_controller_url() . 'download_document/' . $document['PK_DOCUMENT'] ?>">
-                                        <i class=" icon-cloud-download"></i>
-                                    </a>
-                                </td>
-                                <td class='hidden-768'>
-                                    <?php
-                                    for ($i = 1; $i <= 5; $i++):
-                                        $active = FALSE;
-                                        if ($document['AVG_RATING'] >= $i)
-                                        {
-                                            $active = true;
-                                        }
-                                        ?>
-                                        <a style="color:<?php echo ($active) ? '#f8a31f' : '#aaa' ?>"
-                                           rel="tooltip"  data-container="body" href="javascript:;"
-                                           onclick="rate(<?php echo $document['PK_DOCUMENT'] . ',' . $i ?>, this)"
-                                           data-placement="top" title="<?php echo $i . " " . translate("sao") ?>"
-                                           >
-                                            <i class="<?php echo ($active) ? 'icon-star' : 'icon-star-empty' ?>"></i>
-                                        </a>
-                                    <?php endfor; ?>
-                                    (<?php echo number_format($document['AVG_RATING'], 1); ?> <i class="icon-star"></i>, 
-                                    <?php echo ($document['COUNT_RATED_USER']) ? $document['COUNT_RATED_USER'] : 0 ?> 
-                                    <i class="icon-user"></i>)
-                                </td>
-                                <?php if (about_user::is_admin()): ?>
-                                    <td>
-                                        <?php if ($document['C_SHOWN'] != 1): ?>
-                                            <a href="<?php echo $this->get_controller_url() . 'set_document_shown/' . $document['PK_DOCUMENT'] ?>"><i class="icon-ok"></i></a>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td><a href="<?php echo $this->get_controller_url() . 'delete_document/' . $document['PK_DOCUMENT'] ?>"><i class="icon-remove"></i></a></td>
-                                <?php endif; ?>
-                            </tr>
-                        <?php endforeach; ?>
+                        <?php
+                        foreach ($this->arr_all_document as $document):
+                            single_document($document);
+                        endforeach;
+                        ?>
                     </tbody>
                 </table>
                 <?php paginator($this->get_controller_url() . 'dsp_all_document/', $this->count_all_document) ?>

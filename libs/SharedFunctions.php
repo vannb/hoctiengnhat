@@ -237,6 +237,79 @@ function single_grammar($value)
     </div>';
 }
 
+function single_qna_list($value)
+{
+    $value['COUNT_ANSWER'] = isset($value['COUNT_ANSWER']) ? $value['COUNT_ANSWER'] : 0;
+    $value['COUNT_VOTE'] = isset($value['COUNT_VOTE']) ? $value['COUNT_VOTE'] : 0;
+    $value['SUM_VOTE'] = isset($value['SUM_VOTE']) ? $value['SUM_VOTE'] : 0;
+    $vote_up = ($value['COUNT_VOTE'] + $value['SUM_VOTE']) / 2;
+    $vote_down = ($value['COUNT_VOTE'] - $value['SUM_VOTE']) / 2;
+    echo '<tr>'
+    . '<td class="center hidden-768">' . (isset($value['COUNT_ANSWER']) ? $value['COUNT_ANSWER'] : 0) . '</td>'
+    . '<td class="center hidden-768">'
+    . $value['SUM_VOTE']
+    . ' (' . $vote_up . ' <i style="color:green" class="icon-arrow-up"></i>'
+    . $vote_down . ' <i style="color:red" class=" icon-arrow-down"></i>)'
+    . '</td>'
+    . '<td><a href="' . get_controller_url('qna') . 'dsp_single_qna/' . $value['PK_QNA'] . '">' . $value['C_TITLE'] . '<a/></td>'
+    . '<td>' . date_format(new DateTime($value['C_DATE_TIME']), 'H:i:s d/m/Y') . '</td>';
+    if (about_user::is_admin()):
+        echo '<td class="center">'
+        . '<a href="' . get_controller_url('qna') . 'delete_qna/' . $value['PK_QNA'] . '">'
+        . '<i class="icon-remove"></i>'
+        . '</a>'
+        . '</td>';
+    endif;
+    echo '</tr>';
+}
+
+function single_document($document)
+{
+
+    echo '<tr ' . (($document['C_SHOWN'] != 1) ? 'class="success"' : '') . '>'
+    . '<td>' . $document['C_NAME'] . '.' . $document['C_EXT'] . '</td>'
+    . '<td class="hidden-768">' . $document['C_UPLOADER_NAME'] . '</td>'
+    . '<td class="hidden-1024">' . date_format(new DateTime($document['C_UPLOAD_DATE']), 'd-m-Y') . '</td>'
+    . '<td>'
+    . '<a href="' . get_controller_url('document') . 'download_document/' . $document['PK_DOCUMENT'] . '">'
+    . '<i class="icon-cloud-download"></i>'
+    . '</a>'
+    . '</td>'
+    . '<td class="hidden-768">';
+    for ($i = 1; $i <= 5; $i++):
+        $active = FALSE;
+        if (round($document['AVG_RATING']) >= $i)
+        {
+            $active = true;
+        }
+        echo '<a style="color:' . (($active) ? '#f8a31f' : '#aaa')
+        . '"rel="tooltip"  data-container="body" href="javascript:;"'
+        . 'onclick="rate(' . $document['PK_DOCUMENT'] . ', ' . $i . ', this)"'
+        . 'data-placement="top" title="' . $i . " " . translate("sao") . '">'
+        . '<i class="' . (($active) ? 'icon-star' : 'icon-star-empty') . '"></i>'
+        . '</a>';
+    endfor;
+    echo '(' . number_format($document['AVG_RATING'], 1)
+    . '<i class="icon-star"></i>, '
+    . (($document['COUNT_RATED_USER']) ? $document['COUNT_RATED_USER'] : 0)
+    . '<i class="icon-user"></i>)
+                        </td>';
+    if (about_user::is_admin()):
+        echo '<td>';
+        if ($document['C_SHOWN'] != 1):
+            echo '<a href="' . get_controller_url('document') . 'set_document_shown/' . $document['PK_DOCUMENT'] . '"><i class="icon-ok"></i></a>';
+        endif;
+        echo '</td>'
+        . '<td>'
+        . '<a href="' . get_controller_url('document')
+        . 'delete_document/' . $document['PK_DOCUMENT'] . '">'
+        . '<i class="icon-remove"></i>'
+        . '</a>'
+        . '</td>';
+    endif;
+    echo '</tr>';
+}
+
 function single_qna($value)
 {
     $value['COUNT_ANSWER'] = isset($value['COUNT_ANSWER']) ? $value['COUNT_ANSWER'] : 0;
@@ -246,7 +319,7 @@ function single_qna($value)
     $vote_down = ($value['COUNT_VOTE'] - $value['SUM_VOTE']) / 2;
     echo '<li class=left>'
     . '<div class="image" style="text-align: center">'
-    . '<button class="btn" onclick="vote_qna(' . $value['PK_QNA'] . ',1,this)">'
+    . '<button rel="tooltip" data-container="body" data-placement="right" title="+1" class="btn" onclick="vote_qna(' . $value['PK_QNA'] . ',1,this)">'
     . '<i class="icon-arrow-up"></i>'
     . '</button>'
     . '<h3></h3>'
@@ -258,12 +331,15 @@ function single_qna($value)
     . '<i style="color:red" class=" icon-arrow-down"></i>)'
     . '</small>'
     . '<h3></h3>'
-    . '<button class="btn" onclick="vote_qna(' . $value['PK_QNA'] . ',-1,this)">'
+    . '<button  rel="tooltip" data-container="body" data-placement="right" title="-1" class="btn" onclick="vote_qna(' . $value['PK_QNA'] . ',-1,this)">'
     . '<i class="icon-arrow-down"></i>'
     . '</button>'
     . '</div>'
     . '<div class="message">'
     . '<span class = "name">' . $value['C_TITLE'] . '</span>'
+    . '<a class="pull-right" rel="tooltip" data-container="body" data-placement="top" title="' . translate('Xóa bài đăng') . '" href="' . get_controller_url('qna') . 'delete_qna/' . $value['PK_QNA'] . '">'
+    . '<i class="icon-remove"></i>'
+    . '</a>'
     . '<hr>'
     . '<p>' . nl2br($value['C_CONTENT']) . '</p>'
     . '<hr>'

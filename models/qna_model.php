@@ -9,6 +9,10 @@ class Qna_Model extends Model
         parent::__construct();
     }
 
+    function delete_qna($v_qna_id){
+        
+        DB::delete('t_qna', 'PK_QNA = ? OR FK_QNA = ?', array($v_qna_id,$v_qna_id));
+    }
     function vote_qna()
     {
         $qna_id = get_post_var('qna_id');
@@ -61,6 +65,7 @@ class Qna_Model extends Model
                 . " ON qna.FK_USER = us.PK_USER"
                 . " WHERE qna.FK_QNA = 0"
                 . " GROUP BY qna.PK_QNA"
+                . " ORDER BY qna.C_DATE_TIME DESC"
                 . " LIMIT ? OFFSET ?;";
         return $db->GetAll($sql,array($record_per_page,$offset));
     }

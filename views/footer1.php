@@ -1,6 +1,7 @@
                 </div>
             </div>
         </div>
+        <hr>
         <script src="<?php echo PATH ?>js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
 	<script src="<?php echo PATH ?>js/plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
         <script src="<?php echo PATH ?>js/plugins/jquery-ui/jquery.ui.core.min.js"></script>

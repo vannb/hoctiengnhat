@@ -9,6 +9,29 @@ class Home_Model extends Model
         parent::__construct();
     }
 
+    function qry_new_qna()
+    {
+        $db = DB::get_instance();
+        $sql = "SELECT qna.*"
+                . ",COUNT(DISTINCT qna1.PK_QNA)"
+                . " AS COUNT_ANSWER"
+                . " ,SUM(vo.C_VOTED) SUM_VOTE"
+                . " ,COUNT(vo.FK_QNA) COUNT_VOTE"
+                . " ,us.C_NAME AS C_NAME"
+                . " FROM t_qna qna"
+                . " LEFT JOIN t_qna qna1"
+                . " ON qna1.FK_QNA = qna.PK_QNA "
+                . " LEFT JOIN t_voted_qna vo"
+                . " ON qna.PK_QNA = vo.FK_QNA"
+                . " LEFT JOIN t_user us"
+                . " ON qna.FK_USER = us.PK_USER"
+                . " WHERE qna.FK_QNA = 0"
+                . " GROUP BY qna.PK_QNA"
+                . " ORDER BY qna.C_DATE_TIME DESC"
+                . " LIMIT 4 OFFSET 0;";
+        return $db->GetAll($sql);
+    }
+
     function qry_hot_vocab()
     {
         $user_id = (about_user::is_login()) ? about_user::current_user()->user_id : 0;
@@ -57,38 +80,26 @@ class Home_Model extends Model
                         . " ON st1.FK_KANJI = ka.PK_KANJI"
                         . " GROUP BY PK_KANJI"
                         . " ORDER BY STARRED DESC"
-                . " LIMIT 4;", array($user_id));
+                        . " LIMIT 4;", array($user_id));
     }
 
     function qry_new_document()
     {
         $db = DB::get_instance();
-        return $db->GetAll("SELECT do.*, AVG(ra.C_RATING) AS AVG_RATING"
-                        . ", COUNT(ra.FK_USER) AS COUNT_RATED_USER"
-                        . ", us.C_NAME as C_UPLOADER_NAME"
-                        . " FROM t_document do"
-                        . " LEFT JOIN t_user us ON do.FK_UPLOADER = us.PK_USER"
-                        . " LEFT JOIN t_document_rating ra ON ra.FK_DOCUMENT = do.PK_DOCUMENT"
-                        . " WHERE C_SHOWN = 1"
-                        . " GROUP BY do.PK_DOCUMENT"
-                        . " ORDER BY do.C_UPLOAD_DATE DESC"
-                        . " LIMIT 4");
-    }
-
-    function qry_new_qna()
-    {
-        $db = DB::get_instance();
-        $question = $db->GetRow("SELECT qna.*,SUM(C_VOTED) AS VOTED"
-                . " FROM t_qna qna LEFT JOIN t_voted_qna vo"
-                . " ON qna.PK_QNA = vo.FK_QNA"
-                . " WHERE qna.FK_QNA = 0"
-                . " ORDER BY C_DATE_TIME DESC"
-                . " LIMIT 4");
-        if (!$question)
+        $sql = "SELECT do.*, AVG(ra.C_RATING) AS AVG_RATING"
+                . ", COUNT(ra.FK_USER) AS COUNT_RATED_USER"
+                . ", us.C_NAME as C_UPLOADER_NAME"
+                . " FROM t_document do"
+                . " LEFT JOIN t_user us ON do.FK_UPLOADER = us.PK_USER"
+                . " LEFT JOIN t_document_rating ra ON ra.FK_DOCUMENT = do.PK_DOCUMENT";
+        if (!about_user::is_admin())
         {
-            return array();
+            $sql.= " WHERE C_SHOWN = 1";
         }
-        return $question;
+        $sql.= " GROUP BY do.PK_DOCUMENT"
+                . " ORDER BY do.C_SHOWN ASC, do.C_UPLOAD_DATE DESC"
+                . " LIMIT 4 OFFSET 0";
+        return $db->GetAll($sql);
     }
 
 }
