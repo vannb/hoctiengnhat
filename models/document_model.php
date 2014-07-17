@@ -74,7 +74,10 @@ class document_model extends Model
         if ($_FILES['uploader']['error'] == 0)
         {
             $v_file_name = $_FILES['uploader']['name'];
-            $v_document_name = get_post_var('name');
+            $v_document_name = trim(str_replace(';','',str_replace(',','',get_post_var('name'))));
+            if($v_document_name == ''){
+                $v_document_name = 'Document from 2200';
+            }
             $v_file_ext = array_pop(explode('.', $v_file_name));
             $v_tmp_name = $_FILES['uploader']['tmp_name'];
             $v_system_file_name = uniqid();

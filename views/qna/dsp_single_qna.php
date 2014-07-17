@@ -4,7 +4,7 @@
             <?php if ($this->v_qna_id): ?>
                 <div class="box-title">
                     <h3>
-                        <?php echo translate('Câu hỏi mới nhất') ?>
+                        <?php echo $this->arr_qna['C_TITLE'] ?>
                     </h3>
                 </div>
                 <div class="box-content nopadding">
@@ -49,7 +49,7 @@
         <div class="box">
             <div class="box-title">
                 <h3>
-                    <?php echo translate('Gửi trả lời') ?>
+                    <?php echo ($this->v_qna_id) ? translate('Gửi trả lời') : translate('Gửi câu hỏi') ?>
                 </h3>
             </div>
             <div class="box-content nopadding">
